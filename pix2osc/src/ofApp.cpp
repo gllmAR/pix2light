@@ -58,7 +58,8 @@ void ofApp::update(){
             int g_totalPixelVal = loadedPixels[pix+1]; // green pixels
             int b_totalPixelVal = loadedPixels[pix+2]; // blue pixels
            
-            int gs_averagePixelVal = (r_totalPixelVal+g_totalPixelVal+b_totalPixelVal)/3;
+            int gs_averagePixelVal =
+                (r_totalPixelVal+g_totalPixelVal+b_totalPixelVal)/3;
 
             //m.addIntArg(i);
             
@@ -141,7 +142,7 @@ void ofApp::mouseMoved(int x, int y ){
     
     if (y > 0 && y < imgHeight)
     {
-    crop[1]=y;
+        crop[1]=y;
     }
 
 }
