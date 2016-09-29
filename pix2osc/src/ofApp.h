@@ -30,11 +30,13 @@ class ofApp : public ofBaseApp{
     
     void cropWidthChanged(int & cropWidth);
     void cropHeightChanged(int & cropHeight);
+    void samplerChanged(int & sampler);
+    
     
     ofxOscSender sender;
     
     ofImage source;
-    ofImage destination;
+    vector<ofImage> destination;
     ofPixels pix;
     float imgRatio;
     int imgWidth;
@@ -47,9 +49,13 @@ class ofApp : public ofBaseApp{
     ofParameter <float> magnification;
     ofParameter <int> cropWidth;
     ofParameter <int> cropHeight;
+    ofParameter <int> sampler;
     ofxPanel gui;
 
     bool guiHide = true;
+    bool mouseAttached = true;
+    bool walker = false;
+    
     
     
 };
