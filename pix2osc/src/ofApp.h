@@ -27,16 +27,21 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+    void draw2FBO(int index);
+    
     
     void cropWidthChanged(int & cropWidth);
     void cropHeightChanged(int & cropHeight);
     void samplerChanged(int & sampler);
+    void reallocFrameBuffer();
     
     
     ofxOscSender sender;
     
     ofImage source;
     vector<ofImage> destination;
+    vector<ofPixels> pixels;
+
     ofPixels pix;
     float imgRatio;
     int imgWidth;
@@ -50,11 +55,18 @@ class ofApp : public ofBaseApp{
     ofParameter <int> cropWidth;
     ofParameter <int> cropHeight;
     ofParameter <int> sampler;
+    ofParameter <float> fboOverlay;
+    ofParameter <bool> palco;
     ofxPanel gui;
+    
+    vector<ofFbo> frameBuffer;
 
     bool guiHide = true;
     bool mouseAttached = true;
     bool walker = false;
+    bool init = true;
+    bool alloc  = false;
+
     
     
     
