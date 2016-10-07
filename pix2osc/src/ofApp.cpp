@@ -14,10 +14,12 @@ void ofApp::setup(){
     
 
     gui.setup("panel"); // most of the time you don't need a name but don't forget to call setup
+  //  gui.add(hideMouse.set("hide Mouse",0, 0, 1));
     gui.add(magnification.set( "magnification", 4, .01, 10 ));
     gui.add(cropWidth.set( "crop Width", 10, 1, 100 ));
     gui.add(cropHeight.set( "crop Height", 10, 1, 100 ));
     gui.add(sampler.set("sampler", 2, 1, 15));
+   
     gui.add(palco.set("palco",1, 0, 1));
     //gui.add(brightnessPalco.set("brightPalco", 127, 0, 255));
    // gui.add(fboOverlay.set( "FBO overlay", .5, .0, 1. ));
@@ -28,7 +30,10 @@ void ofApp::setup(){
 
     
     
-    source.load("space3.jpg");
+    source.load("space0.jpg");
+    
+    
+    
     imgHeight =source.getHeight();
     imgWidth = source.getWidth();
     imgRatio = source.getHeight()/ source.getWidth();
@@ -44,17 +49,20 @@ void ofApp::setup(){
 
 
     gui.loadFromFile("settings.xml");
+
     
-    frameBuffer.begin();
-    frameBuffer.resize(sampler);
-    frameBuffer.clear();
-    
-    for(int i; i<sampler ; i++){
-        frameBuffer[i].allocate(crop[2],crop[3],GL_RGB);
-    }
-    pixels.resize(sampler);
+    allocFbo();
+//    frameBuffer.begin();
+//    frameBuffer.resize(sampler);
+//    frameBuffer.clear();
+//    
+//    for(int i; i<sampler ; i++){
+//        frameBuffer[i].allocate(crop[2],crop[3],GL_RGB);
+//    }
+//    pixels.resize(sampler);
     
         init = false;
+    //ofHideCursor();
 }
 
 void ofApp::samplerChanged(int & sampler){
@@ -76,10 +84,24 @@ void ofApp::cropHeightChanged(int & cropHeight){
 
 void ofApp::reallocFrameBuffer(){
     
-    
     if (!init){
         alloc = true;
     }
+}
+
+void ofApp::allocFbo(){
+    
+    frameBuffer.begin();
+    frameBuffer.resize(sampler);
+    frameBuffer.clear();
+    
+    for(int i; i<sampler ; i++){
+        frameBuffer[i].allocate(crop[2],crop[3],GL_RGB);
+    }
+    pixels.resize(sampler);
+    alloc = false;
+
+
 }
 
 
@@ -87,23 +109,16 @@ void ofApp::reallocFrameBuffer(){
 void ofApp::update(){
     
 
-    if(alloc){
-        frameBuffer.begin();
-        frameBuffer.resize(sampler);
-        frameBuffer.clear();
-        
-        for(int i; i<sampler ; i++){
-            frameBuffer[i].allocate(crop[2],crop[3],GL_RGB);
-        }
-        pixels.resize(sampler);
-        alloc = false;
-    }
-    
+    if(alloc){allocFbo();}
+   
+
+    if (!alloc){
     
     if (walker){
         crop[0] =ofClamp(crop[0]+ofRandom(-1,2), 0, canvasWidth);
         crop[1] =ofClamp(crop[1]+ofRandom(-1,2), 0, canvasHeight);
     }
+    
     
     ofxOscMessage m;
     m.setAddress("/pix");
@@ -132,13 +147,15 @@ void ofApp::update(){
         if (palco){
             int palcoBrightness = (rgb[0]+rgb[1]+rgb[2])/(maxJ);
             m.addIntArg(255);               //Shutter, strobe:
-            m.addIntArg(255-palcoBrightness );// bright
+            
+            m.addIntArg(255-palcoBrightness*rgb[2]/(maxJ/3)/255 );// bright
             
            //cout<<255-(rgb[0]+rgb[1]+rgb[2])/(maxJ)<<endl;
            
-            m.addIntArg(255-palcoBrightness*rgb[2]/(maxJ/3)/255);   // R
-            m.addIntArg(255-palcoBrightness*rgb[0]/(maxJ/3)/255);   // g
-            m.addIntArg(255-palcoBrightness*rgb[1]/(maxJ/3)/255);   // b
+            m.addIntArg(255-rgb[2]/(maxJ/3));   // R
+            //cout<<"r"<<255-rgb[2]/(maxJ/3)<<"g"<<(255-rgb[0]/(maxJ/3))<<"b"<<(255-rgb[1]/(maxJ/3))<<endl;
+            m.addIntArg(255-rgb[0]/(maxJ/3));   // g
+            m.addIntArg(255-rgb[1]/(maxJ/3));   // b
             m.addIntArg(0);                 // Color corection
             m.addIntArg(0);                 // internal program
             m.addIntArg(0);                 // color mode
@@ -148,6 +165,7 @@ void ofApp::update(){
  sender.sendMessage(m, false);
 sender.sendMessage(n, false);
 
+    }
 }
 }
 
@@ -189,6 +207,8 @@ sender.sendMessage(n, false);
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    if (!alloc){
     source.draw(0, 0);
     
 
@@ -223,14 +243,10 @@ void ofApp::draw(){
         ofDisableAlphaBlending();
 
     
-        if (alloc){
-        
-        }
-    
     if( !guiHide ){
         gui.draw();
     }
-    
+}
 }
 
 //--------------------------------------------------------------

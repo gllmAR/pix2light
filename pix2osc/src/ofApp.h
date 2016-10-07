@@ -26,6 +26,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+        void allocFbo();
     
     void draw2FBO(int index);
     
@@ -56,6 +57,7 @@ class ofApp : public ofBaseApp{
     ofParameter <int> cropHeight;
     ofParameter <int> sampler;
     ofParameter <float> fboOverlay;
+    ofParameter <bool> hideMouse;
     ofParameter <bool> palco;
     ofxPanel gui;
     
