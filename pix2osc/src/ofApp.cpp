@@ -3,103 +3,83 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    
-    
-    ofSetVerticalSync(true);
-    
+    cout<<"start"<<endl;
     
     sampler.addListener(this, &ofApp::samplerChanged);
     cropWidth.addListener(this, &ofApp::cropWidthChanged);
     cropHeight.addListener(this, &ofApp::cropHeightChanged);
     
+    ofSetVerticalSync(true);
+    
+    
+
+    
 
     gui.setup("panel"); // most of the time you don't need a name but don't forget to call setup
-  //  gui.add(hideMouse.set("hide Mouse",0, 0, 1));
+    gui.add(hideMouse.set("hide Mouse",0, 0, 1));
     gui.add(magnification.set( "magnification", 4, .01, 10 ));
     gui.add(cropWidth.set( "crop Width", 10, 1, 100 ));
     gui.add(cropHeight.set( "crop Height", 10, 1, 100 ));
-    gui.add(sampler.set("sampler", 2, 1, 15));
+    gui.add(sampler.set("sampler", 1, 1, 15));
    
     gui.add(palco.set("palco",1, 0, 1));
-    //gui.add(brightnessPalco.set("brightPalco", 127, 0, 255));
+  //  gui.add(brightnessPalco.set("brightPalco", 127, 0, 255));
    // gui.add(fboOverlay.set( "FBO overlay", .5, .0, 1. ));
     
-    
-
-
-
-    
-    
     source.load("space0.jpg");
-    
-    
-    
+
     imgHeight =source.getHeight();
     imgWidth = source.getWidth();
     imgRatio = source.getHeight()/ source.getWidth();
     canvasWidth = ofGetWindowWidth();
     canvasHeight = ofGetWindowHeight();
-   
-    
-  
-    
     
     sender.setup(HOST, PORT);
-    
-
-
     gui.loadFromFile("settings.xml");
+    init = false;
 
-    
-    allocFbo();
-//    frameBuffer.begin();
-//    frameBuffer.resize(sampler);
-//    frameBuffer.clear();
-//    
-//    for(int i; i<sampler ; i++){
-//        frameBuffer[i].allocate(crop[2],crop[3],GL_RGB);
-//    }
-//    pixels.resize(sampler);
-    
-        init = false;
-    //ofHideCursor();
+    cout<<"finishSetup"<<endl;
 }
 
 void ofApp::samplerChanged(int & sampler){
-    destination.resize(sampler);
-    reallocFrameBuffer();
-}
+    alloc = true;
+    }
 
 
 void ofApp::cropWidthChanged(int & cropWidth){
      crop[2]=cropWidth;
-    reallocFrameBuffer();
+    alloc = true;
 }
 
 
 void ofApp::cropHeightChanged(int & cropHeight){
     crop[3]=cropHeight;
-    reallocFrameBuffer();
+    alloc = true;
 }
 
-void ofApp::reallocFrameBuffer(){
-    
-    if (!init){
-        alloc = true;
-    }
-}
+
 
 void ofApp::allocFbo(){
     
-    frameBuffer.begin();
+    crop[2]=cropWidth;
+    crop[3]=cropHeight;
+
+
+    destination.resize(sampler);
     frameBuffer.resize(sampler);
-    frameBuffer.clear();
-    
-    for(int i; i<sampler ; i++){
-        frameBuffer[i].allocate(crop[2],crop[3],GL_RGB);
-    }
+    frameBufferH.resize(sampler);
     pixels.resize(sampler);
+
+    
+    
+    for(int i = 0; i<sampler ; i++){
+        frameBuffer[i].allocate(crop[2],crop[3],GL_RGB);
+        frameBufferH[i].allocate(crop[2],crop[3],GL_RGB);
+    }
+
     alloc = false;
+    
+    cout<<"finiAlloc"<<endl;
 
 
 }
@@ -128,15 +108,22 @@ void ofApp::update(){
     // lire la valeur de brightness dans framme buffer et append la valeur dans un message OSC
     
     for (int i = 0; i<sampler;i++){
-        destination[i].cropFrom(source, ofClamp(crop[0],0,imgWidth) +ofClamp(i*crop[2],0,imgHeight), crop[1], crop[2], crop[3]);
+        
+        int sampleX =ofClamp(crop[0],0,imgWidth)+ofClamp(i*crop[2],0,imgHeight);
+       // cout<<"sampleX "<<sampleX<<endl;
+       // cout<<"sampleX "<<crop[1]<<endl;
+        
+        destination[i].cropFrom(source, sampleX, crop[1], crop[2], crop[3]);
         frameBuffer[i].readToPixels(pixels[i]);
        int rgb [3]{0,0,0};
         
         // calculer l'etendu de ce qui a a faire
         int maxJ =pixels[i].getWidth()*pixels[i].getHeight() * pixels[i].getNumChannels();
+        //cout<<maxJ<<endl;
     
+        if (maxJ!=0){
 
-        
+        // ici -2 au depart de j pour ajuster le offset.....?
         for (int j = -2; j<=maxJ; j=j+3){
             float br = (pixels[i][j]+pixels[i][j+1]+pixels[i][j+2])/3;
             rgb[0] = rgb[0]+pixels[i][j];
@@ -160,6 +147,7 @@ void ofApp::update(){
             m.addIntArg(0);                 // internal program
             m.addIntArg(0);                 // color mode
         
+        }
         }
 
  sender.sendMessage(m, false);
@@ -221,15 +209,16 @@ void ofApp::draw(){
         int dW = crop[2]*magnification;
         int dH = crop[3]*magnification;
     
-        destination[i].draw(dX,dY,crop[2], crop[3]);
+       // destination[i].draw(dX,dY,crop[2], crop[3]);
         
         frameBuffer[i].begin();
-        destination[i].draw(0,0,crop[2], crop[3]);
+            destination[i].draw(0,0,crop[2], crop[3]);
         frameBuffer[i].end();
         
         
        
         frameBuffer[i].draw(dX,dY,dW, dH);
+        ofNoFill();
         ofDrawRectangle(dX,dY,dW, dH);
     }
     

@@ -26,15 +26,12 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    
+    
+        void cropWidthChanged(int & cropWidth);
+        void cropHeightChanged(int & cropHeight);
+        void samplerChanged(int & sampler);
         void allocFbo();
-    
-    void draw2FBO(int index);
-    
-    
-    void cropWidthChanged(int & cropWidth);
-    void cropHeightChanged(int & cropHeight);
-    void samplerChanged(int & sampler);
-    void reallocFrameBuffer();
     
     
     ofxOscSender sender;
@@ -61,7 +58,7 @@ class ofApp : public ofBaseApp{
     ofParameter <bool> palco;
     ofxPanel gui;
     
-    vector<ofFbo> frameBuffer;
+    vector<ofFbo> frameBuffer, frameBufferH;
 
     bool guiHide = true;
     bool mouseAttached = true;
