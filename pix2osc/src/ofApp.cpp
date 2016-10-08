@@ -16,26 +16,23 @@ void ofApp::setup(){
     
     
 
-    
-
     gui.setup("Pix2OSC");
     gui.add(hideMouse.set("hide Mouse",0, 0, 1));
-    gui.add(appFullScreen.set("Fullscreen",0, 0, 1));
+    gui.add(appFullScreen.set("Fullscreen",1, 0, 1));
     gui.add(magnification.set( "magnification", 4, .01, 10 ));
     gui.add(cropWidth.set( "crop Width", 10, 1, 100 ));
     gui.add(cropHeight.set( "crop Height", 10, 1, 100 ));
     gui.add(sampler.set("sampler", 1, 1, 15));
     gui.add(palco.set("palco",1, 0, 1));
     gui.add(brightnessPalco.set("brightness Palco", 127, 0, 255));
-    gui.add(trail.set("trail", 0.1, 0, 1));
-    gui.add(showFBO.set("show Fbo", 0, 0, 1));
+    gui.add(showFBO.set("show FBO", 0, 0, 1));
+    gui.add(caramel.set("Caramel FBO", 0.1, 0, 1));
+    gui.add(trail.set("trail", 0, 0, 1));
+    gui.add(trailTime.set("trail Time", 0.1, 0, 1));
     gui.add(walker.set("Walker", 0, 0, 1));
     gui.add(speedX.set("speedX", 0.1, -10, 10));
     gui.add(speedY.set("speedY", 0.1, -10, 10));
 
-    //gui.add(mouvement.set("mouvement", 0, 0, 1));
-    
-   // gui.add(fboOverlay.set( "FBO overlay", .5, .0, 1. ));
     
     source.load("space0.jpg");
 
@@ -127,10 +124,19 @@ void ofApp::update(){
     
     if (walker){
         
+        //
         
+        float xPos = ofMap(sin(ofGetElapsedTimeMillis()*speedX*0.00001+3.1416),
+                           -1,
+                           1,
+                           0.5*crop[2]*magnification,
+                           0.5*crop[2]*magnification+canvasWidth-sampler*crop[2]*magnification);
         
-        float xPos = ofMap(sin(ofGetElapsedTimeMillis()*speedX*0.00001+3.14), -1, 1, 0.5*crop[2], canvasWidth-sampler*crop[2]*magnification - 0.5*crop[2]);
-        float yPos = ofMap(cos(ofGetElapsedTimeMillis()*speedY*0.00001+3.14), -1, 1, 0.5*crop[3], canvasHeight-crop[3]*magnification -0.5*crop[3]);
+        float yPos = ofMap(cos(ofGetElapsedTimeMillis()*speedY*0.00001+3.1416),
+                           -1,
+                           1,
+                           0.5*crop[3]*magnification,
+                           canvasHeight-0.5*crop[3]*magnification);
         
         crop[0] =ofClamp(xPos, 0, canvasWidth);
         crop[1] =ofClamp(yPos, 0, canvasHeight);
@@ -142,25 +148,27 @@ void ofApp::update(){
     ofxOscMessage n;
     n.setAddress("/avg");
 
-    // lire la valeur de brightness dans framme buffer et append la valeur dans un message OSC
+    // lire la valeur de brightness dans framebuffer et ajouter la valeur dans un message OSC
     
     for (int i = 0; i<sampler;i++){
         
+        // Calculer la position et l'offset de l'échantillon en X par Sampler en fonction du curseur
         int sampleX =ofClamp(crop[0],0,imgWidth)+ofClamp(i*crop[2],0,imgHeight);
-       // cout<<"sampleX "<<sampleX<<endl;
-       // cout<<"sampleX "<<crop[1]<<endl;
-        
+
+        // Sectionner la partie de l'image qui nous interesse (par sampler) pour le frame actuel:
         destination[i].cropFrom(source, sampleX, crop[1], crop[2], crop[3]);
+        // get le contenu en pixel du frame buffer du frame precedant
         frameBuffer[i].readToPixels(pixels[i]);
+        
+        // initialiser un array de int servant à accumuler la valeur de luminance par echantillon/channel
        int rgb [3]{0,0,0};
         
-        // calculer l'etendu de ce qui a a faire
+        // calculer le nombre de pixel * le nombre de channel
         int maxJ =pixels[i].getWidth()*pixels[i].getHeight() * pixels[i].getNumChannels();
-        //cout<<maxJ<<endl;
-    
+        // n'effectuer le calcul que si maxJ est different de 0
         if (maxJ!=0){
 
-        // ici -2 au depart de j pour ajuster le offset.....?
+        // ici -2 au depart de j pour ajuster le offset(pourquoi ça marche...?)
         for (int j = -2; j<=maxJ; j=j+3){
             float br = (pixels[i][j]+pixels[i][j+1]+pixels[i][j+2])/3;
             rgb[0] = rgb[0]+pixels[i][j];
@@ -174,11 +182,7 @@ void ofApp::update(){
             
             m.addIntArg(brightnessPalco);
             //m.addIntArg(255-palcoBrightness*rgb[2]/(maxJ/3)/255 );// bright
-            
-           //cout<<255-(rgb[0]+rgb[1]+rgb[2])/(maxJ)<<endl;
-           
             m.addIntArg(255-rgb[2]/(maxJ/3));   // R
-            //cout<<"r"<<255-rgb[2]/(maxJ/3)<<"g"<<(255-rgb[0]/(maxJ/3))<<"b"<<(255-rgb[1]/(maxJ/3))<<endl;
             m.addIntArg(255-rgb[0]/(maxJ/3));   // g
             m.addIntArg(255-rgb[1]/(maxJ/3));   // b
             m.addIntArg(0);                 // Color corection
@@ -188,46 +192,12 @@ void ofApp::update(){
         }
         }
 
- sender.sendMessage(m, false);
+sender.sendMessage(m, false);
 sender.sendMessage(n, false);
 
     }
 }
 }
-
-    // THE OLD WAY pour lire ce qu'il y a comme valeur de brightness dans l'image
-    
-    //    for (int i = 0; i < sampler; i++){
-    //
-    //    destination[i].cropFrom(source, crop[0] +i*crop[2], crop[1], crop[2], crop[3]);
-    //    numPixels = crop[2]*crop[3];
-    //
-    //    ofPixels & loadedPixels = destination[i].getPixels();
-    //    int numChannels = loadedPixels.getNumChannels();
-    //
-    //    if(numChannels >= 3)
-    //    {
-    //        for (int i=0; i<numPixels; i++)
-    //        {
-    //            int pix = i * numChannels;
-    //            int r_totalPixelVal = loadedPixels[pix]; // red pixels
-    //            int g_totalPixelVal = loadedPixels[pix+1]; // green pixels
-    //            int b_totalPixelVal = loadedPixels[pix+2]; // blue pixels
-    //            int gs_averagePixelVal =(r_totalPixelVal+g_totalPixelVal+b_totalPixelVal)/3;
-    //            m.addIntArg(gs_averagePixelVal);
-    //        }
-    //    }
-    //
-    //    else if (numChannels == 1 )
-    //    {
-    //        for (int i=0; i<numPixels; i++)
-    //        {
-    //            int gs_totalPixelVal = loadedPixels[i]; // grayscale
-    //        }
-    //    };
-    //        
-    //    }
-    
 
 
 
@@ -239,57 +209,81 @@ void ofApp::draw(){
         fullscreenFlag = 0;
         canvasWidth = ofGetWindowWidth();
         canvasHeight = ofGetWindowHeight();
-    }
+        // peut etre un probleme d'allocation si regle le bug du toggle fullscreen on boot
+        // could be move to setup
+        trailFbo.allocate(canvasWidth, canvasHeight,GL_RGBA);
+        trailFboH.allocate(canvasWidth, canvasHeight,GL_RGBA);
+        }
 
     
+    // ne dessiner que si l'allocation est terminée (segfault Safegard)
     if (!alloc){
     source.draw(0, 0);
+        
+        
+        if (trail){
+            trailFbo.begin();
+            ofClear(0,0,0,0);
+            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            ofSetColor(trailTime*255);
+            trailFboH.draw(0,0,canvasWidth,canvasHeight);
+            //ofSetColor(ofClamp(255-trailTime*254,1,255));
+            ofSetColor(255);
+            ofDrawCircle(crop[0] + 0.5 * sampler * crop[2]*magnification - 0.5*crop[2]*magnification,
+                         crop[1],
+                         1);
+            trailFbo.end();
+            
+            
+            trailFboH.begin();
+            
+            ofClear(0,0,0,0);
+            trailFbo.draw(0,0,canvasWidth,canvasHeight);
+            trailFboH.end();
+            
+            
+            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            trailFbo.draw(0,0,canvasWidth,canvasHeight);
+        }
+        
     
-
     
-    // calculer le offset et la magnification
     for (int i = 0; i < sampler; i++){
+        // calculer le offset et la magnification
         
         int dX = crop[0]+(crop[2]/2) - crop[2]*magnification/2 +i*crop[2]*magnification ;
         int dY = crop[1]+(crop[3]/2) - crop[3]*magnification/2;
         int dW = crop[2]*magnification;
         int dH = crop[3]*magnification;
     
-       // destination[i].draw(dX,dY,crop[2], crop[3]);
+        // transferer l'image croppé et additioner le fbo historique
         
         frameBuffer[i].begin();
             ofClear(0.);
             ofEnableBlendMode(OF_BLENDMODE_ADD);
-            ofSetColor(trail*255);
+            ofSetColor(caramel*255);
             frameBufferH[i].draw(0,0,crop[2], crop[3]);
-        ofSetColor(ofClamp(255-trail*254,0,255));
+        ofSetColor(ofClamp(255-caramel*254,1,255));
             destination[i].draw(0,0,crop[2], crop[3]);
         frameBuffer[i].end();
         
+        // storer l'image dans le fbo
         frameBufferH[i].begin();
         ofClear(0.);
-            frameBuffer[i].draw(0,0,crop[2], crop[3]);
+        frameBuffer[i].draw(0,0,crop[2], crop[3]);
         frameBufferH[i].end();
         
         
         if (showFBO){
         frameBuffer[i].draw(dX,dY,dW, dH);
         }
-        if (!showFBO){
+       else {
             destination[i].draw(dX,dY,dW, dH);
         }
         ofNoFill();
         ofDrawRectangle(dX,dY,dW, dH);
     }
     
-    
-    ofEnableAlphaBlending();
-    ofEnableBlendMode(OF_BLENDMODE_SCREEN);
-    
-    ofSetColor(255, 255, 255, 255);
-    ofSetLineWidth(1);
-    ofNoFill();
-        ofDisableAlphaBlending();
 
     
     if( !guiHide ){

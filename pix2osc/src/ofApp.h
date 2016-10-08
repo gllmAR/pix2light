@@ -45,6 +45,7 @@ class ofApp : public ofBaseApp{
     vector<ofImage> destination;
     vector<ofPixels> pixels;
     vector<ofFbo> frameBuffer, frameBufferH;
+    ofFbo trailFbo, trailFboH;
 
     ofPixels pix;
     float imgRatio;
@@ -63,11 +64,13 @@ class ofApp : public ofBaseApp{
     ofParameter <bool> hideMouse;
     ofParameter <bool> palco;
     ofParameter <int> brightnessPalco;
-    ofParameter <float> trail;
+    ofParameter <float> caramel;
     ofParameter <bool> showFBO;
     ofParameter <float> speedX;
     ofParameter <float> speedY;
     ofParameter <bool> appFullScreen;
+    ofParameter <bool> trail;
+    ofParameter <float> trailTime;
     
     ofParameter <bool> walker;
 
