@@ -6,4 +6,15 @@
 <hide_Mouse>0</hide_Mouse>
 	<sampler>2</sampler>
 	<palco>1</palco>
+<Pix2OSC>
+		<hide_Mouse>0</hide_Mouse>
+		<magnification>7.85215</magnification>
+		<crop_Width>15</crop_Width>
+		<crop_Height>15</crop_Height>
+		<sampler>2</sampler>
+		<palco>1</palco>
+		<brightness_Palco>127</brightness_Palco>
+		<trail>0.905</trail>
+		<show_Fbo>0</show_Fbo>
+	</Pix2OSC>
 </panel>

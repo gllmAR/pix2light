@@ -28,9 +28,14 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     
+    
+        void walkerChanged(bool & walker);
+        void hideMouseChanged(bool & hideMouse);
+        void appFullScreenChanged(bool & appFullScreen);
         void cropWidthChanged(int & cropWidth);
         void cropHeightChanged(int & cropHeight);
         void samplerChanged(int & sampler);
+    
         void allocFbo();
     
     
@@ -39,6 +44,7 @@ class ofApp : public ofBaseApp{
     ofImage source;
     vector<ofImage> destination;
     vector<ofPixels> pixels;
+    vector<ofFbo> frameBuffer, frameBufferH;
 
     ofPixels pix;
     float imgRatio;
@@ -56,16 +62,28 @@ class ofApp : public ofBaseApp{
     ofParameter <float> fboOverlay;
     ofParameter <bool> hideMouse;
     ofParameter <bool> palco;
+    ofParameter <int> brightnessPalco;
+    ofParameter <float> trail;
+    ofParameter <bool> showFBO;
+    ofParameter <float> speedX;
+    ofParameter <float> speedY;
+    ofParameter <bool> appFullScreen;
+    
+    ofParameter <bool> walker;
+
+    //ofParameter <bool> mouvement;
     ofxPanel gui;
     
-    vector<ofFbo> frameBuffer, frameBufferH;
 
+
+    
     bool guiHide = true;
     bool mouseAttached = true;
-    bool walker = false;
+
     bool init = true;
     bool alloc  = false;
 
+    bool fullscreenFlag = false;
     
     
     

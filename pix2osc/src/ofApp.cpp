@@ -5,9 +5,12 @@ void ofApp::setup(){
     
     cout<<"start"<<endl;
     
+    walker.addListener(this, &ofApp::walkerChanged);
     sampler.addListener(this, &ofApp::samplerChanged);
     cropWidth.addListener(this, &ofApp::cropWidthChanged);
     cropHeight.addListener(this, &ofApp::cropHeightChanged);
+    hideMouse.addListener(this, &ofApp::hideMouseChanged);
+    appFullScreen.addListener(this, &ofApp::appFullScreenChanged);
     
     ofSetVerticalSync(true);
     
@@ -15,15 +18,23 @@ void ofApp::setup(){
 
     
 
-    gui.setup("panel"); // most of the time you don't need a name but don't forget to call setup
+    gui.setup("Pix2OSC");
     gui.add(hideMouse.set("hide Mouse",0, 0, 1));
+    gui.add(appFullScreen.set("Fullscreen",0, 0, 1));
     gui.add(magnification.set( "magnification", 4, .01, 10 ));
     gui.add(cropWidth.set( "crop Width", 10, 1, 100 ));
     gui.add(cropHeight.set( "crop Height", 10, 1, 100 ));
     gui.add(sampler.set("sampler", 1, 1, 15));
-   
     gui.add(palco.set("palco",1, 0, 1));
-  //  gui.add(brightnessPalco.set("brightPalco", 127, 0, 255));
+    gui.add(brightnessPalco.set("brightness Palco", 127, 0, 255));
+    gui.add(trail.set("trail", 0.1, 0, 1));
+    gui.add(showFBO.set("show Fbo", 0, 0, 1));
+    gui.add(walker.set("Walker", 0, 0, 1));
+    gui.add(speedX.set("speedX", 0.1, -10, 10));
+    gui.add(speedY.set("speedY", 0.1, -10, 10));
+
+    //gui.add(mouvement.set("mouvement", 0, 0, 1));
+    
    // gui.add(fboOverlay.set( "FBO overlay", .5, .0, 1. ));
     
     source.load("space0.jpg");
@@ -55,6 +66,24 @@ void ofApp::cropWidthChanged(int & cropWidth){
 void ofApp::cropHeightChanged(int & cropHeight){
     crop[3]=cropHeight;
     alloc = true;
+}
+
+void ofApp::hideMouseChanged(bool & hideMouse){
+    if(hideMouse){
+        ofHideCursor();
+    }else{
+        ofShowCursor();
+    }
+}
+
+void ofApp::appFullScreenChanged(bool & appFullScreen){
+    
+    fullscreenFlag=1;
+
+}
+
+void ofApp::walkerChanged(bool & walker){
+
 }
 
 
@@ -89,14 +118,22 @@ void ofApp::allocFbo(){
 void ofApp::update(){
     
 
+    
+
     if(alloc){allocFbo();}
-   
+    
 
     if (!alloc){
     
     if (walker){
-        crop[0] =ofClamp(crop[0]+ofRandom(-1,2), 0, canvasWidth);
-        crop[1] =ofClamp(crop[1]+ofRandom(-1,2), 0, canvasHeight);
+        
+        
+        
+        float xPos = ofMap(sin(ofGetElapsedTimeMillis()*speedX*0.00001+3.14), -1, 1, 0.5*crop[2], canvasWidth-sampler*crop[2]*magnification - 0.5*crop[2]);
+        float yPos = ofMap(cos(ofGetElapsedTimeMillis()*speedY*0.00001+3.14), -1, 1, 0.5*crop[3], canvasHeight-crop[3]*magnification -0.5*crop[3]);
+        
+        crop[0] =ofClamp(xPos, 0, canvasWidth);
+        crop[1] =ofClamp(yPos, 0, canvasHeight);
     }
     
     
@@ -135,7 +172,8 @@ void ofApp::update(){
             int palcoBrightness = (rgb[0]+rgb[1]+rgb[2])/(maxJ);
             m.addIntArg(255);               //Shutter, strobe:
             
-            m.addIntArg(255-palcoBrightness*rgb[2]/(maxJ/3)/255 );// bright
+            m.addIntArg(brightnessPalco);
+            //m.addIntArg(255-palcoBrightness*rgb[2]/(maxJ/3)/255 );// bright
             
            //cout<<255-(rgb[0]+rgb[1]+rgb[2])/(maxJ)<<endl;
            
@@ -196,6 +234,14 @@ sender.sendMessage(n, false);
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+    if (fullscreenFlag){
+        ofToggleFullscreen();
+        fullscreenFlag = 0;
+        canvasWidth = ofGetWindowWidth();
+        canvasHeight = ofGetWindowHeight();
+    }
+
+    
     if (!alloc){
     source.draw(0, 0);
     
@@ -212,12 +258,26 @@ void ofApp::draw(){
        // destination[i].draw(dX,dY,crop[2], crop[3]);
         
         frameBuffer[i].begin();
+            ofClear(0.);
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            ofSetColor(trail*255);
+            frameBufferH[i].draw(0,0,crop[2], crop[3]);
+        ofSetColor(ofClamp(255-trail*254,0,255));
             destination[i].draw(0,0,crop[2], crop[3]);
         frameBuffer[i].end();
         
+        frameBufferH[i].begin();
+        ofClear(0.);
+            frameBuffer[i].draw(0,0,crop[2], crop[3]);
+        frameBufferH[i].end();
         
-       
+        
+        if (showFBO){
         frameBuffer[i].draw(dX,dY,dW, dH);
+        }
+        if (!showFBO){
+            destination[i].draw(dX,dY,dW, dH);
+        }
         ofNoFill();
         ofDrawRectangle(dX,dY,dW, dH);
     }
@@ -255,6 +315,13 @@ void ofApp::keyPressed(int key){
     }
     if (key == 'w'){
         walker = !walker;
+    }
+    if (key == 'h'){
+        hideMouse = !hideMouse;
+    }
+    
+    if (key == 'f'){
+        appFullScreen = !appFullScreen;
     }
     
 
@@ -310,6 +377,8 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
+    canvasWidth = w;
+    canvasHeight = h;
 
 
 }
