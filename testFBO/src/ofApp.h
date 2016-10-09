@@ -21,7 +21,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-        vector<ofFbo> fbo;
+        vector<ofFbo> fbo, fboH;
+
     int fboNombre;
 		
 };
