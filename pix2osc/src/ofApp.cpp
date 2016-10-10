@@ -99,8 +99,8 @@ void ofApp::allocFbo(){
     
     
     for(int i = 0; i<sampler ; i++){
-        frameBuffer[i].allocate(crop[2],crop[3],GL_RGB);
-        frameBufferH[i].allocate(crop[2],crop[3],GL_RGB);
+        frameBuffer[i].allocate(crop[2],crop[3],GL_RGBA);
+        frameBufferH[i].allocate(crop[2],crop[3],GL_RGBA);
     }
 
     alloc = false;
@@ -161,7 +161,7 @@ void ofApp::update(){
         frameBuffer[i].readToPixels(pixels[i]);
         
         // initialiser un array de int servant à accumuler la valeur de luminance par echantillon/channel
-       int rgb [3]{0,0,0};
+       int rgb [4]{0,0,0,0};
         
         // calculer le nombre de pixel * le nombre de channel
         int maxJ =pixels[i].getWidth()*pixels[i].getHeight() * pixels[i].getNumChannels();
@@ -169,7 +169,7 @@ void ofApp::update(){
         if (maxJ!=0){
 
         // ici -2 au depart de j pour ajuster le offset(pourquoi ça marche...?)
-        for (int j = -2; j<=maxJ; j=j+3){
+        for (int j = -2; j<=maxJ; j=j+4){
             float br = (pixels[i][j]+pixels[i][j+1]+pixels[i][j+2])/3;
             rgb[0] = rgb[0]+pixels[i][j];
             rgb[1] = rgb[1]+pixels[i][j+1];
