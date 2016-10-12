@@ -7,8 +7,8 @@
 	<sampler>2</sampler>
 	<palco>1</palco>
 <Pix2OSC>
-		<hide_Mouse>1</hide_Mouse>
-		<magnification>7.85215</magnification>
+		<hide_Mouse>0</hide_Mouse>
+		<magnification>3.65635</magnification>
 		<crop_Width>15</crop_Width>
 		<crop_Height>15</crop_Height>
 		<sampler>2</sampler>
@@ -16,12 +16,17 @@
 		<brightness_Palco>127</brightness_Palco>
 		<trail>1</trail>
 		<show_Fbo>0</show_Fbo>
-	<Fullscreen>1</Fullscreen>
+	<Fullscreen>0</Fullscreen>
 		<show_FBO>0</show_FBO>
-		<Caramel_FBO>0.1</Caramel_FBO>
+		<Caramel_FBO>0.215</Caramel_FBO>
 		<trail_Time>0.9975</trail_Time>
 		<Walker>1</Walker>
-		<speedX>9.2375</speedX>
-		<speedY>9.7175</speedY>
+		<speedX>-4.2575</speedX>
+		<speedY>-3.1775</speedY>
+	<palco_Color>0, 0, 255, 49</palco_Color>
+		<palco_ColorCorrect>116</palco_ColorCorrect>
+		<palco_PGM_change>0</palco_PGM_change>
+		<palco_Color_Mode>0</palco_Color_Mode>
+	<palco_Brightness_>1</palco_Brightness_>
 	</Pix2OSC>
 </panel>

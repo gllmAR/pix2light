@@ -35,6 +35,7 @@ class ofApp : public ofBaseApp{
         void cropWidthChanged(int & cropWidth);
         void cropHeightChanged(int & cropHeight);
         void samplerChanged(int & sampler);
+
     
         void allocFbo();
     
@@ -63,7 +64,7 @@ class ofApp : public ofBaseApp{
     ofParameter <float> fboOverlay;
     ofParameter <bool> hideMouse;
     ofParameter <bool> palco;
-    ofParameter <int> brightnessPalco;
+
     ofParameter <float> caramel;
     ofParameter <bool> showFBO;
     ofParameter <float> speedX;
@@ -71,7 +72,11 @@ class ofApp : public ofBaseApp{
     ofParameter <bool> appFullScreen;
     ofParameter <bool> trail;
     ofParameter <float> trailTime;
-    
+    ofParameter <float> brightnessPalco;
+    ofParameter <ofColor> palcoColor;
+    ofParameter <int> palcoColorCorrect;
+    ofParameter <int> palcoPgmChange;
+    ofParameter <int > palcoColorMode;
     ofParameter <bool> walker;
 
     //ofParameter <bool> mouvement;

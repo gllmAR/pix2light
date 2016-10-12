@@ -11,9 +11,9 @@ void ofApp::setup(){
     cropHeight.addListener(this, &ofApp::cropHeightChanged);
     hideMouse.addListener(this, &ofApp::hideMouseChanged);
     appFullScreen.addListener(this, &ofApp::appFullScreenChanged);
-    
     ofSetVerticalSync(true);
     
+
     
 
     gui.setup("Pix2OSC");
@@ -23,8 +23,7 @@ void ofApp::setup(){
     gui.add(cropWidth.set( "crop Width", 10, 1, 100 ));
     gui.add(cropHeight.set( "crop Height", 10, 1, 100 ));
     gui.add(sampler.set("sampler", 1, 1, 15));
-    gui.add(palco.set("palco",1, 0, 1));
-    gui.add(brightnessPalco.set("brightness Palco", 127, 0, 255));
+
     gui.add(showFBO.set("show FBO", 0, 0, 1));
     gui.add(caramel.set("Caramel FBO", 0.1, 0, 1));
     gui.add(trail.set("trail", 0, 0, 1));
@@ -32,6 +31,15 @@ void ofApp::setup(){
     gui.add(walker.set("Walker", 0, 0, 1));
     gui.add(speedX.set("speedX", 0.1, -10, 10));
     gui.add(speedY.set("speedY", 0.1, -10, 10));
+    
+    gui.add(palco.set("palco",1, 0, 1));
+    gui.add(brightnessPalco.set("palco Brightness ", 1, .5, 10));
+
+	gui.add(palcoColor.set("palco Color",ofColor(100,100,140),ofColor(0,0),ofColor(255,255)));
+    
+    gui.add(palcoColorCorrect.set("palco ColorCorrect", 0, 0, 255));
+    gui.add(palcoPgmChange.set("palco PGM change", 0, 0, 255));
+    gui.add(palcoColorMode.set("palco Color Mode", 0, 0, 255));
 
     
     source.load("space0.jpg");
@@ -85,6 +93,7 @@ void ofApp::walkerChanged(bool & walker){
 
 
 
+
 void ofApp::allocFbo(){
     
     crop[2]=cropWidth;
@@ -114,7 +123,9 @@ void ofApp::allocFbo(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-
+//    cout<<
+//    palcoColor.getParameter()
+//    <<endl;
     
 
     if(alloc){allocFbo();}
@@ -169,26 +180,35 @@ void ofApp::update(){
         if (maxJ!=0){
 
         // ici -2 au depart de j pour ajuster le offset(pourquoi ça marche...?)
-        for (int j = -2; j<=maxJ; j=j+4){
+        for (int j = 0; j<=maxJ; j=j+4){
             float br = (pixels[i][j]+pixels[i][j+1]+pixels[i][j+2])/3;
+            //cout<<br<<endl;
             rgb[0] = rgb[0]+pixels[i][j];
             rgb[1] = rgb[1]+pixels[i][j+1];
             rgb[2] = rgb[2]+pixels[i][j+2];
             m.addIntArg(br);
     }
         if (palco){
+            
             int palcoBrightness = (rgb[0]+rgb[1]+rgb[2])/(maxJ);
             m.addIntArg(255);               //Shutter, strobe:
             
-            m.addIntArg(brightnessPalco);
-            //m.addIntArg(255-palcoBrightness*rgb[2]/(maxJ/3)/255 );// bright
-            m.addIntArg(255-rgb[2]/(maxJ/3));   // R
-            m.addIntArg(255-rgb[0]/(maxJ/3));   // g
-            m.addIntArg(255-rgb[1]/(maxJ/3));   // b
-            m.addIntArg(0);                 // Color corection
-            m.addIntArg(0);                 // internal program
-            m.addIntArg(0);                 // color mode
+            
+            cout<<palcoColor<<endl;
+//            m.addIntArg(palcoColor->a);
+            m.addIntArg(ofClamp(255-(palcoBrightness*brightnessPalco),1, 255));
+            m.addIntArg(palcoColor->r);
+            m.addIntArg(palcoColor->g);
+            m.addIntArg(palcoColor->b);
+//            m.addIntArg(255-palcoBrightness*rgb[2]/(maxJ/3)/255 );// bright
+//            m.addIntArg(255-rgb[2]/(maxJ/3));   // R
+//            m.addIntArg(255-rgb[0]/(maxJ/3));   // g
+//            m.addIntArg(255-rgb[1]/(maxJ/3));   // b
+            m.addIntArg(palcoColorCorrect);                 // Color corection
+            m.addIntArg(palcoPgmChange);                 // internal program
+            m.addIntArg(palcoColorMode);                 // color mode
         
+
         }
         }
 
