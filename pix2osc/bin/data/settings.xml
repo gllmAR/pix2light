@@ -8,7 +8,11 @@
 	<palco>1</palco>
 <Pix2OSC>
 		<hide_Mouse>0</hide_Mouse>
+<<<<<<< HEAD
 		<magnification>3.65635</magnification>
+=======
+		<magnification>7.85215</magnification>
+>>>>>>> 2c5d008e5c7fd73e90585df2f2ef638fdd084681
 		<crop_Width>15</crop_Width>
 		<crop_Height>15</crop_Height>
 		<sampler>2</sampler>
