@@ -51,7 +51,7 @@ void ofApp::setup(){
 
     guiTrail.add(trail.set("trail", 0, 0, 1));
     guiTrail.add(trailSize.set("trail Size", 1, 1, 50));
-    guiTrail.add(trailTime.set("trail Time", 0.1, 0.98, 1.02));
+    guiTrail.add(trailTime.set("trail Time", 0.1, 0., 1.02));
     guiTrail.add(trailColor.set("trail Color", ofColor(200,200,200,200), ofColor(0,0), ofColor(255,255)));
 
         gui.add(&guiTrail);
