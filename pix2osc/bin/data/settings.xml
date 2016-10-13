@@ -1,36 +1,24 @@
-<panel>
-	<magnification>7.15285</magnification>
-<panel/>
-<crop_Width>15</crop_Width>
-	<crop_Height>15</crop_Height>
-<hide_Mouse>0</hide_Mouse>
-	<sampler>2</sampler>
-	<palco>1</palco>
 <Pix2OSC>
-		<hide_Mouse>0</hide_Mouse>
-<<<<<<< HEAD
-		<magnification>3.65635</magnification>
-=======
-		<magnification>7.85215</magnification>
->>>>>>> 2c5d008e5c7fd73e90585df2f2ef638fdd084681
-		<crop_Width>15</crop_Width>
-		<crop_Height>15</crop_Height>
-		<sampler>2</sampler>
-		<palco>1</palco>
-		<brightness_Palco>127</brightness_Palco>
-		<trail>1</trail>
-		<show_Fbo>0</show_Fbo>
-	<Fullscreen>0</Fullscreen>
-		<show_FBO>0</show_FBO>
-		<Caramel_FBO>0.215</Caramel_FBO>
-		<trail_Time>0.9975</trail_Time>
-		<Walker>1</Walker>
-		<speedX>-4.2575</speedX>
-		<speedY>-3.1775</speedY>
-	<palco_Color>0, 0, 255, 49</palco_Color>
-		<palco_ColorCorrect>116</palco_ColorCorrect>
-		<palco_PGM_change>0</palco_PGM_change>
-		<palco_Color_Mode>0</palco_Color_Mode>
-	<palco_Brightness_>1</palco_Brightness_>
-	</Pix2OSC>
-</panel>
+	<serveurDMXip>192.168.2.8</serveurDMXip>
+	<serveurDMXport>12345</serveurDMXport>
+	<hide_Mouse>0</hide_Mouse>
+	<Fullscreen>1</Fullscreen>
+	<magnification>4</magnification>
+	<crop_Width>15</crop_Width>
+	<crop_Height>15</crop_Height>
+	<sampler>2</sampler>
+	<show_FBO>0</show_FBO>
+	<Caramel_FBO>0.1</Caramel_FBO>
+	<trail>0</trail>
+	<trail_Time>0.1</trail_Time>
+	<Walker>0</Walker>
+	<speedX>0.1</speedX>
+	<speedY>0.1</speedY>
+	<palco>1</palco>
+	<palco_Brightness_>8.2425</palco_Brightness_>
+	<palco_Color>0, 0, 62, 255</palco_Color>
+	<palco_ColorCorrect>0</palco_ColorCorrect>
+	<palco_PGM_change>0</palco_PGM_change>
+	<palco_Color_Mode>0</palco_Color_Mode>
+<Pix2OSC/>
+</Pix2OSC>

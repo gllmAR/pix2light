@@ -11,12 +11,16 @@ void ofApp::setup(){
     cropHeight.addListener(this, &ofApp::cropHeightChanged);
     hideMouse.addListener(this, &ofApp::hideMouseChanged);
     appFullScreen.addListener(this, &ofApp::appFullScreenChanged);
+    serveurDMXport.addListener(this, &ofApp::serveurDMXportChanged);
+    
     ofSetVerticalSync(true);
     
 
     
 
     gui.setup("Pix2OSC");
+    gui.add (serveurDMXip.set("serveurDMXip", "127.0.0.1"));
+    gui.add (serveurDMXport.set("serveurDMXport", 12345, 12340, 12350));
     gui.add(hideMouse.set("hide Mouse",0, 0, 1));
     gui.add(appFullScreen.set("Fullscreen",1, 0, 1));
     gui.add(magnification.set( "magnification", 4, .01, 10 ));
@@ -32,7 +36,9 @@ void ofApp::setup(){
     gui.add(speedX.set("speedX", 0.1, -10, 10));
     gui.add(speedY.set("speedY", 0.1, -10, 10));
     
+    
     gui.add(palco.set("palco",1, 0, 1));
+    gui.add(palcoAsserv.set("palco Asserv", 1, 0 ,1));
     gui.add(brightnessPalco.set("palco Brightness ", 1, .5, 10));
 
 	gui.add(palcoColor.set("palco Color",ofColor(100,100,140),ofColor(0,0),ofColor(255,255)));
@@ -42,7 +48,7 @@ void ofApp::setup(){
     gui.add(palcoColorMode.set("palco Color Mode", 0, 0, 255));
 
     
-    source.load("space0.jpg");
+    source.load("calib1.jpg");
 
     imgHeight =source.getHeight();
     imgWidth = source.getWidth();
@@ -50,11 +56,17 @@ void ofApp::setup(){
     canvasWidth = ofGetWindowWidth();
     canvasHeight = ofGetWindowHeight();
     
-    sender.setup(HOST, PORT);
     gui.loadFromFile("settings.xml");
+    sender.setup(serveurDMXip, serveurDMXport);
     init = false;
 
     cout<<"finishSetup"<<endl;
+}
+
+void ofApp::serveurDMXportChanged(int & serveurDMXport){
+    sender.setup(serveurDMXip, serveurDMXport);
+
+
 }
 
 void ofApp::samplerChanged(int & sampler){
@@ -180,7 +192,7 @@ void ofApp::update(){
         if (maxJ!=0){
 
         // ici -2 au depart de j pour ajuster le offset(pourquoi ça marche...?)
-        for (int j = 0; j<=maxJ; j=j+4){
+        for (int j = -2; j<=maxJ; j=j+4){
             float br = (pixels[i][j]+pixels[i][j+1]+pixels[i][j+2])/3;
             //cout<<br<<endl;
             rgb[0] = rgb[0]+pixels[i][j];
@@ -196,10 +208,18 @@ void ofApp::update(){
             
             cout<<palcoColor<<endl;
 //            m.addIntArg(palcoColor->a);
-            m.addIntArg(ofClamp(255-(palcoBrightness*brightnessPalco),1, 255));
-            m.addIntArg(palcoColor->r);
-            m.addIntArg(palcoColor->g);
-            m.addIntArg(palcoColor->b);
+            if (palcoAsserv){
+                m.addIntArg(ofClamp(255-(palcoBrightness*brightnessPalco),1, 255));
+                m.addIntArg(palcoColor->r);
+                m.addIntArg(palcoColor->g);
+                m.addIntArg(palcoColor->b);
+            } else {
+                m.addIntArg(palcoColor->a);
+                m.addIntArg(palcoColor->r);
+                m.addIntArg(palcoColor->g);
+                m.addIntArg(palcoColor->b);
+                
+            }
 //            m.addIntArg(255-palcoBrightness*rgb[2]/(maxJ/3)/255 );// bright
 //            m.addIntArg(255-rgb[2]/(maxJ/3));   // R
 //            m.addIntArg(255-rgb[0]/(maxJ/3));   // g
