@@ -2,11 +2,11 @@
 	<serveurDMXip>192.168.2.8</serveurDMXip>
 	<serveurDMXport>12345</serveurDMXport>
 	<hide_Mouse>0</hide_Mouse>
-	<Fullscreen>1</Fullscreen>
+	<Fullscreen>0</Fullscreen>
 	<magnification>4</magnification>
-	<crop_Width>15</crop_Width>
-	<crop_Height>15</crop_Height>
-	<sampler>2</sampler>
+	<crop_Width>1</crop_Width>
+	<crop_Height>1</crop_Height>
+	<sampler>1</sampler>
 	<show_FBO>0</show_FBO>
 	<Caramel_FBO>0.1</Caramel_FBO>
 	<trail>0</trail>
@@ -14,11 +14,13 @@
 	<Walker>0</Walker>
 	<speedX>0.1</speedX>
 	<speedY>0.1</speedY>
-	<palco>1</palco>
+	<palco>0</palco>
 	<palco_Brightness_>8.2425</palco_Brightness_>
 	<palco_Color>0, 0, 62, 255</palco_Color>
 	<palco_ColorCorrect>0</palco_ColorCorrect>
 	<palco_PGM_change>0</palco_PGM_change>
 	<palco_Color_Mode>0</palco_Color_Mode>
 <Pix2OSC/>
+<imageSource>space0.jpg</imageSource>
+	<palco_Asserv>1</palco_Asserv>
 </Pix2OSC>

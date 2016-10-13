@@ -190,7 +190,7 @@ void ofApp::update(){
         if (maxJ!=0){
 
         // ici -2 au depart de j pour ajuster le offset(pourquoi ca marche...?)
-        for (int j = -4; j<=maxJ; j=j+4){
+        for (int j = 0; j<maxJ; j=j+4){
             
             float br = (pixels[i][j]+pixels[i][j+1]+pixels[i][j+2])/3;
             //cout<<br<<endl;
@@ -198,6 +198,7 @@ void ofApp::update(){
             rgb[1] = rgb[1]+pixels[i][j+1];
             rgb[2] = rgb[2]+pixels[i][j+2];
             m.addIntArg(br);
+            
     }
         if (palco){
             
@@ -226,13 +227,11 @@ void ofApp::update(){
             m.addIntArg(palcoColorCorrect);                 // Color corection
             m.addIntArg(palcoPgmChange);                 // internal program
             m.addIntArg(palcoColorMode);                 // color mode
-        
-
         }
         }
 
 sender.sendMessage(m, false);
-sender.sendMessage(n, false);
+//sender.sendMessage(n, false);
 
     }
 }
