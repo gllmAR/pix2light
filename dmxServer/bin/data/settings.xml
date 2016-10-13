@@ -1,5 +1,5 @@
 <DMX-Server>
 	<device>ttyUSB0</device>
 <DMX-Server/>
-	<port>12340</port>
+	<port>12349</port>
 </DMX-Server>
