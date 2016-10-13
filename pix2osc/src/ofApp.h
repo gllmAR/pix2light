@@ -88,6 +88,7 @@ class ofApp : public ofBaseApp{
     ofParameter <float> speedY;
     ofParameter <bool> appFullScreen;
     ofParameter <bool> trail;
+    ofParameter <float> trailSize;
     ofParameter <float> trailTime;
     ofParameter <bool> palco;
     ofParameter <bool> palcoAsserv;
@@ -115,6 +116,8 @@ class ofApp : public ofBaseApp{
     bool alloc  = false;
 
     bool fullscreenFlag = false;
+    bool allocTrailFbo = false;
+
     
     
 

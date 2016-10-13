@@ -446,9 +446,7 @@ obj/linuxarmv7l/Release/src/main.o: \
  /home/artificiel/aur/of/addons/ofxOsc/src/ofxOscReceiver.h \
  /home/artificiel/aur/of/addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h \
  /home/artificiel/aur/of/addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h \
- /home/artificiel/aur/of/addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h \
- /home/artificiel/aur/of/addons/ofxXmlSettings/src/ofxXmlSettings.h \
- /home/artificiel/aur/of/addons/ofxXmlSettings/libs/tinyxml.h
+ /home/artificiel/aur/of/addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h
 
 /home/artificiel/aur/of/libs/openFrameworks/ofMain.h:
 
@@ -1387,7 +1385,3 @@ obj/linuxarmv7l/Release/src/main.o: \
 /home/artificiel/aur/of/addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h:
 
 /home/artificiel/aur/of/addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h:
-
-/home/artificiel/aur/of/addons/ofxXmlSettings/src/ofxXmlSettings.h:
-
-/home/artificiel/aur/of/addons/ofxXmlSettings/libs/tinyxml.h:

@@ -1,25 +1,6 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-Particle::Particle(){
-    live=false;
-}
-
-void Particle::setup(){
-    pos = ofPoint(0,0);
-    time = 0;
-    lifeTime = 1000;
-    live = true;
-}
-
-void Particle::update(int x, int y){
-    pos = ofPoint(x,y);
-    
-}
-
-void Particle::draw(){
-    ofDrawCircle(pos, 1);
-}
 
 void ofApp::setup(){
     
@@ -52,7 +33,8 @@ void ofApp::setup(){
     gui.add(showFBO.set("show FBO", 0, 0, 1));
     gui.add(caramel.set("Caramel FBO", 0.1, 0, 1));
     gui.add(trail.set("trail", 0, 0, 1));
-    gui.add(trailTime.set("trail Time", 0.1, 0, 1));
+    gui.add(trailSize.set("trail Size", 1, 1, 50));
+    gui.add(trailTime.set("trail Time", 0.1, 0.98, 1.02));
     gui.add(walker.set("Walker", 0, 0, 1));
     gui.add(speedX.set("speedX", 0.1, -10, 10));
     gui.add(speedY.set("speedY", 0.1, -10, 10));
@@ -262,16 +244,25 @@ sender.sendMessage(m, false);
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    if (fullscreenFlag){
-        ofToggleFullscreen();
-        fullscreenFlag = 0;
+    if (allocTrailFbo){
         canvasWidth = ofGetWindowWidth();
         canvasHeight = ofGetWindowHeight();
         // peut etre un probleme d'allocation si regle le bug du toggle fullscreen on boot
+        // le bug est que get window ne rapporte pas la bonne rez quand on switch
         // could be move to setup
         cout<<"allocTrail"<<endl;
         trailFbo.allocate(canvasWidth, canvasHeight,GL_RGBA);
+        
         trailFboH.allocate(canvasWidth, canvasHeight,GL_RGBA);
+        cout<<canvasWidth<<" "<<canvasHeight<<endl;
+        allocTrailFbo = 0;
+    }
+    
+    if (fullscreenFlag){
+        ofToggleFullscreen();
+        fullscreenFlag = 0;
+        allocTrailFbo = 1;
+
         }
 
     
@@ -279,29 +270,29 @@ void ofApp::draw(){
     if (!alloc){
     source.draw(0, 0);
         
+    
+        
         
         if (trail){
+            
             trailFbo.begin();
-            ofClear(0,0,0,0);
-            //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-            ofSetColor(trailTime*255);
-            trailFboH.draw(0,0,canvasWidth,canvasHeight);
-            //ofSetColor(ofClamp(255-trailTime*254,1,255));
-            ofSetColor(255);
-            ofDrawCircle(crop[0] + 0.5 * sampler * crop[2]*magnification - 0.5*crop[2]*magnification,
-                         crop[1],
-                         1);
+                ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+                //ofClear(0,0,0,0);
+                ofSetColor(255,255,255,trailTime*255);
+                trailFboH.draw(0,0,canvasWidth,canvasHeight);
+                ofSetColor(255,255,255,255);
+                ofFill();
+            ofDrawRectangle(crop[0] + 0.5 * sampler * crop[2]*magnification - 0.5*crop[2]*magnification,crop[1],trailSize, trailSize);
+                //ofDrawCircle(crop[0] + 0.5 * sampler * crop[2]*magnification - 0.5*crop[2]*magnification,crop[1],trailSize);
             trailFbo.end();
             
-            
             trailFboH.begin();
-            
-            ofClear(0,0,0,0);
-            trailFbo.draw(0,0,canvasWidth,canvasHeight);
+                //ofClear(0,0,0,0);
+                ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+                trailFbo.draw(0,0,canvasWidth,canvasHeight);
             trailFboH.end();
             
-            
-           // ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+        
             trailFbo.draw(0,0,canvasWidth,canvasHeight);
         }
         
