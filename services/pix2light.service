@@ -1,0 +1,13 @@
+[Unit]
+Description=pix2light
+
+[Service]
+User=artificiel
+ExecStart=/home/artificiel/aur/of/apps/pix2light/pix2osc/bin/pix2osc
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
+

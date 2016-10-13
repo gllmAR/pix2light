@@ -1,0 +1,13 @@
+[Unit]
+Description=dmxServer
+
+[Service]
+User=artificiel
+ExecStart=/home/artificiel/aur/of/apps/pix2light/dmxServer/bin/dmxServer
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
+
