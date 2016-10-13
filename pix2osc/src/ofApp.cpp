@@ -1,6 +1,26 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
+Particle::Particle(){
+    live=false;
+}
+
+void Particle::setup(){
+    pos = ofPoint(0,0);
+    time = 0;
+    lifeTime = 1000;
+    live = true;
+}
+
+void Particle::update(int x, int y){
+    pos = ofPoint(x,y);
+    
+}
+
+void Particle::draw(){
+    ofDrawCircle(pos, 1);
+}
+
 void ofApp::setup(){
     
     cout<<"start"<<endl;
@@ -249,6 +269,7 @@ void ofApp::draw(){
         canvasHeight = ofGetWindowHeight();
         // peut etre un probleme d'allocation si regle le bug du toggle fullscreen on boot
         // could be move to setup
+        cout<<"allocTrail"<<endl;
         trailFbo.allocate(canvasWidth, canvasHeight,GL_RGBA);
         trailFboH.allocate(canvasWidth, canvasHeight,GL_RGBA);
         }
@@ -262,7 +283,7 @@ void ofApp::draw(){
         if (trail){
             trailFbo.begin();
             ofClear(0,0,0,0);
-            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             ofSetColor(trailTime*255);
             trailFboH.draw(0,0,canvasWidth,canvasHeight);
             //ofSetColor(ofClamp(255-trailTime*254,1,255));
@@ -280,7 +301,7 @@ void ofApp::draw(){
             trailFboH.end();
             
             
-            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+           // ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             trailFbo.draw(0,0,canvasWidth,canvasHeight);
         }
         

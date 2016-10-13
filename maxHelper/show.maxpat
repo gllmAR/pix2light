@@ -38,15 +38,39 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-3",
-					"linecount" : 3,
+					"id" : "obj-5",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 146.0, -11.0, 144.0, 22.0 ],
+					"style" : "",
+					"text" : "udpsend localhost 12345"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-4",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 129.0, 17.0, 50.0, 49.0 ],
+					"patching_rect" : [ 146.0, 37.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "127 127 127"
+					"text" : "225"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 137.0, 13.0, 137.0, 22.0 ],
+					"style" : "",
+					"text" : "zl.len @zlmaxsize 1000"
 				}
 
 			}
@@ -89,12 +113,21 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 2.0, 3.0, 106.0, 22.0 ],
 					"style" : "",
-					"text" : "udpreceive 12345"
+					"text" : "udpreceive 12346"
 				}
 
 			}
  ],
 		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
@@ -105,10 +138,19 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 1 ],
+					"destination" : [ "obj-4", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-8", 1 ]
+					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-8", 0 ]
 				}
 
 			}

@@ -7,7 +7,7 @@ void ofApp::setup(){
 
     ofSetFrameRate(44);
 
-    gui.add(port.set("port", 12345 ,1000, 65000));
+    gui.add(port.set("port", 12345 ,12340, 12350));
     gui.add(deviceName.set("device", "d"));
     gui.loadFromFile("settings.xml");
             
@@ -62,8 +62,8 @@ void ofApp::update(){
         receiver.getNextMessage(m);
         //cout<<m.getAddress()<<endl;
         if(m.getAddress() == "/pix"){
-            for (int i = 1; i<ofClamp(m.getNumArgs(),0,512); i++){
-                dmxValue[i]=m.getArgAsInt(i);
+            for (int i = 0; i<ofClamp(m.getNumArgs(),0,511); i++){
+                dmxValue[i+1]=m.getArgAsInt(i);
               
             }
         }
