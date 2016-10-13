@@ -11,7 +11,10 @@
 	<Caramel_FBO>0.77</Caramel_FBO>
 	<trail>1</trail>
 	<trail_Time>1.0016</trail_Time>
-	<Walker>1</Walker>
+	<Walker>1<Walker>1</Walker>
+		<speedX>2.44898</speedX>
+		<speedY>2.7551</speedY>
+	</Walker>
 	<speedX>-0.6</speedX>
 	<speedY>1.4</speedY>
 	<palco>1</palco>
@@ -24,4 +27,28 @@
 <imageSource>space0.jpg</imageSource>
 	<palco_Asserv>1</palco_Asserv>
 <trail_Size>2.47</trail_Size>
+<Sampler>
+		<nombre>2</nombre>
+		<magnification>4</magnification>
+		<crop_Width>15</crop_Width>
+		<crop_Height>15</crop_Height>
+		<show_caramel>0</show_caramel>
+		<Caramel_Mou>0.836735</Caramel_Mou>
+		<SamplerColor>255, 255, 255, 63</SamplerColor>
+	</Sampler>
+	<Trail>
+		<trail>1</trail>
+		<trail_Size>1.55</trail_Size>
+		<trail_Time>1.02</trail_Time>
+		<trail_Color>200, 200, 200, 146</trail_Color>
+	</Trail>
+	<Palco>
+		<palco>1</palco>
+		<palco_Asserv>1</palco_Asserv>
+		<palco_Brightness_Factor_>1</palco_Brightness_Factor_>
+		<palco_Color>0, 0, 140, 255</palco_Color>
+		<palco_ColorCorrect>0</palco_ColorCorrect>
+		<palco_PGM_change>0</palco_PGM_change>
+		<palco_Color_Mode>0</palco_Color_Mode>
+	</Palco>
 </Pix2OSC>

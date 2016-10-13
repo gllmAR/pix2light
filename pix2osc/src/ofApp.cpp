@@ -25,33 +25,56 @@ void ofApp::setup(){
     gui.add (serveurDMXport.set("serveurDMXport", 12345, 12340, 12350));
     gui.add(hideMouse.set("hide Mouse",0, 0, 1));
     gui.add(appFullScreen.set("Fullscreen",1, 0, 1));
-    gui.add(magnification.set( "magnification", 4, .01, 10 ));
-    gui.add(cropWidth.set( "crop Width", 10, 1, 100 ));
-    gui.add(cropHeight.set( "crop Height", 10, 1, 100 ));
-    gui.add(sampler.set("sampler", 1, 1, 15));
+    
+    
+    guiSampler.setup("Sampler");
+    guiSampler.add(sampler.set("nombre", 1, 1, 15));
+    guiSampler.add(magnification.set( "magnification", 4, .01, 10 ));
+    guiSampler.add(cropWidth.set( "crop Width", 10, 1, 100 ));
+    guiSampler.add(cropHeight.set( "crop Height", 10, 1, 100 ));
+    guiSampler.add(showFBO.set("show caramel", 0, 0, 1));
+    guiSampler.add(caramel.set("Caramel Mou", 0.1, 0, 1));
+    guiSampler.add(samplerColor.set("SamplerColor",ofColor(200,200,200,200), ofColor(0,0), ofColor(255,255)));
+    
+    gui.add(&guiSampler);
+    
+    
+    
+    guiWalker.setup("Walker");
+    guiWalker.add(walker.set("Walker", 0, 0, 1));
+    guiWalker.add(speedX.set("speedX", 0.1, -10, 10));
+    guiWalker.add(speedY.set("speedY", 0.1, -10, 10));
+    gui.add(&guiWalker);
 
-    gui.add(showFBO.set("show FBO", 0, 0, 1));
-    gui.add(caramel.set("Caramel FBO", 0.1, 0, 1));
-    gui.add(trail.set("trail", 0, 0, 1));
-    gui.add(trailSize.set("trail Size", 1, 1, 50));
-    gui.add(trailTime.set("trail Time", 0.1, 0.98, 1.02));
-    gui.add(walker.set("Walker", 0, 0, 1));
-    gui.add(speedX.set("speedX", 0.1, -10, 10));
-    gui.add(speedY.set("speedY", 0.1, -10, 10));
     
-    
-    gui.add(palco.set("palco",1, 0, 1));
-    gui.add(palcoAsserv.set("palco Asserv", 1, 0 ,1));
-    gui.add(brightnessPalco.set("palco Brightness ", 1, .5, 10));
+        guiTrail.setup("Trail");
 
-	gui.add(palcoColor.set("palco Color",ofColor(100,100,140),ofColor(0,0),ofColor(255,255)));
+    guiTrail.add(trail.set("trail", 0, 0, 1));
+    guiTrail.add(trailSize.set("trail Size", 1, 1, 50));
+    guiTrail.add(trailTime.set("trail Time", 0.1, 0.98, 1.02));
+    guiTrail.add(trailColor.set("trail Color", ofColor(200,200,200,200), ofColor(0,0), ofColor(255,255)));
+
+        gui.add(&guiTrail);
     
-    gui.add(palcoColorCorrect.set("palco ColorCorrect", 0, 0, 255));
-    gui.add(palcoPgmChange.set("palco PGM change", 0, 0, 255));
-    gui.add(palcoColorMode.set("palco Color Mode", 0, 0, 255));
+    
+  
+    guiPalco.setup("Palco");
+    
+    guiPalco.add(palco.set("palco",1, 0, 1));
+    guiPalco.add(palcoAsserv.set("palco Asserv", 1, 0 ,1));
+    guiPalco.add(brightnessPalco.set("palco Brightness Factor ", 1, .5, 10));
+    
+    guiPalco.add(palcoColor.set("palco Color",ofColor(100,100,140),ofColor(0,0),ofColor(255,255)));
+    
+    guiPalco.add(palcoColorCorrect.set("palco ColorCorrect", 0, 0, 255));
+    guiPalco.add(palcoPgmChange.set("palco PGM change", 0, 0, 255));
+    guiPalco.add(palcoColorMode.set("palco Color Mode", 0, 0, 255));
+    
+    gui.add(&guiPalco);
+    
 
     gui.loadFromFile("settings.xml");
-    //sender.setup(serveurDMXip, serveurDMXport);
+
     source.load(imgSource);
     imgHeight =source.getHeight();
     imgWidth = source.getWidth();
@@ -135,11 +158,6 @@ void ofApp::allocFbo(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-//    cout<<
-//    palcoColor.getParameter()
-//    <<endl;
-    
-
     if(alloc){allocFbo();}
     
 
@@ -168,8 +186,7 @@ void ofApp::update(){
     
     ofxOscMessage m;
     m.setAddress("/pix");
-    ofxOscMessage n;
-    n.setAddress("/avg");
+
 
     // lire la valeur de brightness dans framebuffer et ajouter la valeur dans un message OSC
     
@@ -233,7 +250,7 @@ void ofApp::update(){
         }
 
 sender.sendMessage(m, false);
-//sender.sendMessage(n, false);
+
 
     }
 }
@@ -268,10 +285,8 @@ void ofApp::draw(){
     
     // ne dessiner que si l'allocation est terminée (segfault Safegard)
     if (!alloc){
+    ofSetColor(255);
     source.draw(0, 0);
-        
-    
-        
         
         if (trail){
             
@@ -280,7 +295,7 @@ void ofApp::draw(){
                 //ofClear(0,0,0,0);
                 ofSetColor(255,255,255,trailTime*255);
                 trailFboH.draw(0,0,canvasWidth,canvasHeight);
-                ofSetColor(255,255,255,255);
+                ofSetColor(trailColor);
                 ofFill();
             ofDrawRectangle(crop[0] + 0.5 * sampler * crop[2]*magnification - 0.5*crop[2]*magnification,crop[1],trailSize, trailSize);
                 //ofDrawCircle(crop[0] + 0.5 * sampler * crop[2]*magnification - 0.5*crop[2]*magnification,crop[1],trailSize);
@@ -299,6 +314,7 @@ void ofApp::draw(){
     
     
     for (int i = 0; i < sampler; i++){
+         ofSetColor(255,255,255,255);
         // calculer le offset et la magnification
         
         int dX = crop[0]+(crop[2]/2) - crop[2]*magnification/2 +i*crop[2]*magnification ;
@@ -323,14 +339,18 @@ void ofApp::draw(){
         frameBuffer[i].draw(0,0,crop[2], crop[3]);
         frameBufferH[i].end();
         
-        
+      
+
         if (showFBO){
+            
         frameBuffer[i].draw(dX,dY,dW, dH);
         }
        else {
-            destination[i].draw(dX,dY,dW, dH);
+           
+        destination[i].draw(dX,dY,dW, dH);
         }
         ofNoFill();
+        ofSetColor(samplerColor);
         ofDrawRectangle(dX,dY,dW, dH);
     }
     

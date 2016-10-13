@@ -74,22 +74,32 @@ class ofApp : public ofBaseApp{
     int crop[4] ={0,0,10,10} ;
     int numPixels;
     
+    
+    ofParameter <bool> hideMouse;
+    ofParameter <string> imgSource;
+    ofParameter <string> serveurDMXip;
+    ofParameter <int> serveurDMXport;
+    ofParameter <bool> appFullScreen;
+    
+    
+    ofParameter <int> sampler;
     ofParameter <float> magnification;
     ofParameter <int> cropWidth;
     ofParameter <int> cropHeight;
-    ofParameter <int> sampler;
     ofParameter <float> fboOverlay;
-    ofParameter <bool> hideMouse;
-
-
     ofParameter <float> caramel;
     ofParameter <bool> showFBO;
+    ofParameter <ofColor> samplerColor;
+    
+    ofParameter <bool> walker;
     ofParameter <float> speedX;
     ofParameter <float> speedY;
-    ofParameter <bool> appFullScreen;
     ofParameter <bool> trail;
     ofParameter <float> trailSize;
     ofParameter <float> trailTime;
+    ofParameter <ofColor> trailColor;
+    
+    
     ofParameter <bool> palco;
     ofParameter <bool> palcoAsserv;
     ofParameter <float> brightnessPalco;
@@ -97,13 +107,17 @@ class ofApp : public ofBaseApp{
     ofParameter <int> palcoColorCorrect;
     ofParameter <int> palcoPgmChange;
     ofParameter <int > palcoColorMode;
-    ofParameter <bool> walker;
-    ofParameter <string> serveurDMXip;
-    ofParameter <int> serveurDMXport;
-    ofParameter <string> imgSource;
+
+
+
 
     //ofParameter <bool> mouvement;
     ofxPanel gui;
+    ofxGuiGroup guiSampler;
+    ofxGuiGroup guiWalker;
+    ofxGuiGroup guiTrail;
+    ofxGuiGroup guiPalco;
+    
     
   
 
