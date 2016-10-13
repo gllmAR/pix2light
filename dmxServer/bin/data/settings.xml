@@ -1,0 +1,5 @@
+<DMX-Server>
+	<device>tty.usbserial-ENSYD63O</device>
+<DMX-Server/>
+	<port>12345</port>
+</DMX-Server>
