@@ -3,13 +3,39 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    dmx.connect("tty.usbserial-ENSYD63O", total);
-    dmx.update(true); // black on startup
-    cout << "listening for osc messages on port " << PORT << "\n";
-    receiver.setup(PORT);
+    gui.setup("DMX-Server");
+
     ofSetFrameRate(44);
+
+    gui.add(port.set("port", 12345 ,1000, 65000));
+    gui.add(deviceName.set("device", "d"));
+    gui.loadFromFile("settings.xml");
+            
+    connectUsbDmx(deviceName);
 }
 
+//--------------------------------------------------------------
+
+void ofApp::connectUsbDmx(std::string deviceID){
+    
+    cout<<"connecting to " <<deviceID<<endl;
+    
+    if (!dmx.isConnected()){
+        dmx.clear();
+        dmx.update(true); // black on shutdown
+        dmx.disconnect();
+    }
+    
+    dmx.connect(deviceID, total);
+    dmx.update(true); // black on startup
+    if(dmx.isConnected()){
+        cout << "listening for osc messages on port " << port << "\n";
+        receiver.setup(port);
+    } else {
+        cout << "Error on connection to usb Dongle" <<endl;
+    }
+
+}
 //--------------------------------------------------------------
 
 void ofApp::exit() {
@@ -24,10 +50,11 @@ void ofApp::exit() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    
-    std::stringstream strm;
-    strm << "fps: " << ofGetFrameRate();
-    ofSetWindowTitle(strm.str());
+
+
+//    std::stringstream strm;
+//    strm << "fps: " << ofGetFrameRate();
+//    ofSetWindowTitle(strm.str());
     
     while(receiver.hasWaitingMessages()){
         // get the next message
@@ -53,22 +80,37 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     if(dmx.isConnected()) {
+        ofSetColor(0,255,0);
+        
+        ofDrawBitmapString("()"  , 0,20);
         
         for(int channel = 1; channel <= total; channel++) {
-            
-            //dmx.setLevel(channel, ofRandom(0,255));
             dmx.setLevel(channel, dmxValue[channel]);
         }
         dmx.update();
     } else {
-        ofSetColor(255);
-        ofDrawBitmapString("Could not connect to dmx ", 250,20);
+        ofSetColor(255, 0, 0);
+        ofDrawBitmapString("Could not connect to dmx ", 0,20);
+    }
+    
+    if (!guiHide){
+        gui.draw();
     }
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
+    if( key == 'g' ){
+        guiHide = !guiHide;
+    }
+    if(key == 's') {
+        gui.saveToFile("settings.xml");
+    }
+    if(key == 'l') {
+        gui.loadFromFile("settings.xml");
+    }
 
 }
 

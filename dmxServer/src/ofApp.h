@@ -4,10 +4,10 @@
 #include "ofxDmx.h"
 #include "ofxGui.h"
 #include "ofxOsc.h"
-#include "ofxXmlSettings.h"
 
 
-#define PORT 12345
+
+//#define PORT 12345
 
 class ofApp : public ofBaseApp{
 
@@ -16,6 +16,8 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
         void exit();
+    
+    void connectUsbDmx(std::string deviceID);
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -30,8 +32,20 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     	ofxDmx dmx;
-		int total = 512;
+        ofSerial serial;
+    		int total = 512;
         int dmxValue[512];
     
         ofxOscReceiver receiver;
+    
+    ofParameter<string> deviceName;
+    ofParameter<int> port;
+    
+    ofxPanel gui;
+    
+    bool guiHide = true;
+
+    
+
+
 };
