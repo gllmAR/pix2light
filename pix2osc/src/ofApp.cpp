@@ -19,6 +19,7 @@ void ofApp::setup(){
     
 
     gui.setup("Pix2OSC");
+    gui.add (imgSource.set("imageSource", "space0.jpg"));
     gui.add (serveurDMXip.set("serveurDMXip", "127.0.0.1"));
     gui.add (serveurDMXport.set("serveurDMXport", 12345, 12340, 12350));
     gui.add(hideMouse.set("hide Mouse",0, 0, 1));
@@ -47,17 +48,14 @@ void ofApp::setup(){
     gui.add(palcoPgmChange.set("palco PGM change", 0, 0, 255));
     gui.add(palcoColorMode.set("palco Color Mode", 0, 0, 255));
 
-    
-    source.load("calib1.jpg");
-
+    gui.loadFromFile("settings.xml");
+    //sender.setup(serveurDMXip, serveurDMXport);
+    source.load(imgSource);
     imgHeight =source.getHeight();
     imgWidth = source.getWidth();
     imgRatio = source.getHeight()/ source.getWidth();
     canvasWidth = ofGetWindowWidth();
     canvasHeight = ofGetWindowHeight();
-    
-    gui.loadFromFile("settings.xml");
-    sender.setup(serveurDMXip, serveurDMXport);
     init = false;
 
     cout<<"finishSetup"<<endl;
@@ -175,7 +173,7 @@ void ofApp::update(){
     
     for (int i = 0; i<sampler;i++){
         
-        // Calculer la position et l'offset de l'échantillon en X par Sampler en fonction du curseur
+        // Calculer la position et l'offset de l'echantillon en X par Sampler en fonction du curseur
         int sampleX =ofClamp(crop[0],0,imgWidth)+ofClamp(i*crop[2],0,imgHeight);
 
         // Sectionner la partie de l'image qui nous interesse (par sampler) pour le frame actuel:
@@ -183,7 +181,7 @@ void ofApp::update(){
         // get le contenu en pixel du frame buffer du frame precedant
         frameBuffer[i].readToPixels(pixels[i]);
         
-        // initialiser un array de int servant à accumuler la valeur de luminance par echantillon/channel
+        // initialiser un array de int servant a accumuler la valeur de luminance par echantillon/channel
        int rgb [4]{0,0,0,0};
         
         // calculer le nombre de pixel * le nombre de channel
@@ -191,8 +189,9 @@ void ofApp::update(){
         // n'effectuer le calcul que si maxJ est different de 0
         if (maxJ!=0){
 
-        // ici -2 au depart de j pour ajuster le offset(pourquoi ça marche...?)
-        for (int j = -2; j<=maxJ; j=j+4){
+        // ici -2 au depart de j pour ajuster le offset(pourquoi ca marche...?)
+        for (int j = -4; j<=maxJ; j=j+4){
+            
             float br = (pixels[i][j]+pixels[i][j+1]+pixels[i][j+2])/3;
             //cout<<br<<endl;
             rgb[0] = rgb[0]+pixels[i][j];
@@ -206,7 +205,7 @@ void ofApp::update(){
             m.addIntArg(255);               //Shutter, strobe:
             
             
-            cout<<palcoColor<<endl;
+     
 //            m.addIntArg(palcoColor->a);
             if (palcoAsserv){
                 m.addIntArg(ofClamp(255-(palcoBrightness*brightnessPalco),1, 255));
@@ -370,9 +369,10 @@ void ofApp::keyReleased(int key){
 void ofApp::mouseMoved(int x, int y ){
     
     if (mouseAttached){
-    
+       
     if (x > 0 && x < imgWidth)
     {
+       
         crop[0]=x;
     }
     

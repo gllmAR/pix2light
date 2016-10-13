@@ -83,6 +83,7 @@ class ofApp : public ofBaseApp{
     ofParameter <bool> walker;
     ofParameter <string> serveurDMXip;
     ofParameter <int> serveurDMXport;
+    ofParameter <string> imgSource;
 
     //ofParameter <bool> mouvement;
     ofxPanel gui;
