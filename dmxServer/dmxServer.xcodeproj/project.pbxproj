@@ -545,7 +545,7 @@
 					"-D__MACOSX_CORE__",
 					"-mtune=native",
 				);
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -589,7 +589,7 @@
 					"-D__MACOSX_CORE__",
 					"-mtune=native",
 				);
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

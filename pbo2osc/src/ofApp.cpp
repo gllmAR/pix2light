@@ -1,32 +1,19 @@
 #include "ofApp.h"
 
+
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    fboNombre = 2;
-    
-    fbo.resize(fboNombre);
-    fboH.resize(fboNombre);
-    
-    for (int i= 0; i < fboNombre; i++){
-        fbo[i].allocate(10, 10, GL_RGB);
-        fboH[i].allocate(10, 10, GL_RGB);
-    }
+    imgLoader.setup("calib");
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    for (int i= 0; i < fboNombre; i++){
-        fbo[i].draw(i*10, 10, 10, 10);
-        fboH[i].draw(i*10, 400, 10, 10);
 
-    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    
 
 }
 

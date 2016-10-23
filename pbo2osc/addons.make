@@ -1,4 +1,3 @@
 ofxGui
 ofxOsc
 ofxThreadedImageLoader
-ofxXmlSettings

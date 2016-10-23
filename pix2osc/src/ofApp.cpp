@@ -2,9 +2,16 @@
 
 //--------------------------------------------------------------
 
+// todo, dessiner des sous texture et readback en pbo pour connaitre lex pix
+
 void ofApp::setup(){
     
+    //
     cout<<"start"<<endl;
+    ofSetVerticalSync(true);
+    
+    
+    // addListener space
     
     walker.addListener(this, &ofApp::walkerChanged);
     sampler.addListener(this, &ofApp::samplerChanged);
@@ -14,10 +21,9 @@ void ofApp::setup(){
     appFullScreen.addListener(this, &ofApp::appFullScreenChanged);
     serveurDMXport.addListener(this, &ofApp::serveurDMXportChanged);
     
-    ofSetVerticalSync(true);
-    
 
-    
+
+      // Gui space
 
     gui.setup("Pix2OSC");
     gui.add (imgSource.set("imageSource", "space0.jpg"));
@@ -73,8 +79,14 @@ void ofApp::setup(){
     gui.add(&guiPalco);
     
 
+    // settings spaces
     gui.loadFromFile("settings.xml");
+    
+    // init imgLoader
+    
+    //imgLoader.load(0, 1);
 
+    
     source.load(imgSource);
     imgHeight =source.getHeight();
     imgWidth = source.getWidth();
@@ -162,6 +174,8 @@ void ofApp::update(){
     
 
     if (!alloc){
+        
+      
     
     if (walker){
         
@@ -197,6 +211,7 @@ void ofApp::update(){
 
         // Sectionner la partie de l'image qui nous interesse (par sampler) pour le frame actuel:
         destination[i].cropFrom(source, sampleX, crop[1], crop[2], crop[3]);
+       
         // get le contenu en pixel du frame buffer du frame precedant
         frameBuffer[i].readToPixels(pixels[i]);
         
@@ -283,10 +298,12 @@ void ofApp::draw(){
         }
 
     
-    // ne dessiner que si l'allocation est terminÃ©e (segfault Safegard)
+    // ne dessiner que si l'allocation est terminÃe (segfault Safegard)
     if (!alloc){
     ofSetColor(255);
     source.draw(0, 0);
+   
+     
         
         if (trail){
             
@@ -364,6 +381,7 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    //cout<<key<<endl;
     
     if( key == 'g' ){
         guiHide = !guiHide;
@@ -383,11 +401,15 @@ void ofApp::keyPressed(int key){
     if (key == 'h'){
         hideMouse = !hideMouse;
     }
-    
     if (key == 'f'){
         appFullScreen = !appFullScreen;
     }
-    
+    if (key == OF_KEY_LEFT){ //key left
+       
+    }
+    if (key == OF_KEY_RIGHT){ //key right
+ 
+    }
 
 }
 
@@ -404,12 +426,12 @@ void ofApp::mouseMoved(int x, int y ){
     if (x > 0 && x < imgWidth)
     {
        
-        crop[0]=x;
+        crop[0]=ofClamp(x, 0,imgWidth-1) ;
     }
     
     if (y > 0 && y < imgHeight)
     {
-        crop[1]=y;
+        crop[1]=ofClamp(y, 0, imgHeight-1);
     }
     }
 

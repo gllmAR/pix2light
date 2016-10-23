@@ -3,23 +3,12 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxGui.h"
+#include "imgLoader.hpp"
 
 #define HOST "localhost"
 #define PORT 12345
 
-class Particle {
-    public :
-    Particle();
-    void setup();
-    void update(int x, int y);
-    void draw();
-    
-    ofPoint pos;
-    ofPoint vel;
-    float time;
-    float lifeTime;
-    bool live;
-};
+
 
 
 
@@ -56,6 +45,7 @@ class ofApp : public ofBaseApp{
     
         void allocFbo();
     
+    imgLoader imgLoader;
     
     ofxOscSender sender;
     
