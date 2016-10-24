@@ -16,16 +16,21 @@
 #include "ofxThreadedImageLoader.h"
 
 
-class imgLoader {
+class ImgLoader {
     
 public:
-    void setup(string folder);
+    void setup(int width, int height);
+    void loadDir(string folder);
     void exit();
     void load(int id, int index);
     void next();
     void prev();
     void update();
     void draw();
+    
+
+    
+    bool debug = false;
     
     vector<int> imgWidth;
     vector<int> imgHeight;
@@ -36,7 +41,8 @@ public:
     
     int playhead;
     
-    ofFbo swapperFbo;
+    
+    ofFbo canvasFbo;
     
     bool nextFrame = 0;
     bool prevFrame = 0;

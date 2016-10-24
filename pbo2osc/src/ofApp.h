@@ -6,6 +6,7 @@
 #include "ofxOsc.h"
 #include "ofxGui.h"
 #include "imgLoader.hpp"
+#include "pixSampler.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -32,8 +33,11 @@ class ofApp : public ofBaseApp{
     
     void allocFbo();
     
-    imgLoader imgLoader;
+    ImgLoader imgLoader;
+    PixSampler pixSampler;
     ofxOscSender sender;
+    
+    int cursorX, cursorY;
 		
 };
 
