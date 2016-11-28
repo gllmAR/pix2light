@@ -68,10 +68,11 @@ sudo systemctl daemon-reload && sudo systemctl enable dmxServer && sudo systemct
 ```
 sudo gpasswd --add artificiel uucp
 ```
-		
-[] slideshow d;images
+[] orbit : http://www.physics.csbsju.edu/orbit/orbit.2d.html		
+[X] slideshow d;images
 [] artnet
-[] dmx serveur : command line argument de config
-[] dmx serveur : windowless app.
+?[] dmx serveur : command line argument de config
+?[] dmx serveur : windowless app.
 [] asservissement / master / timeline quotidien
 [] améliorer le trait dans le dessin.
+[] bug : long terme sur osx Memory Leak? 

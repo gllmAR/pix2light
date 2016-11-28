@@ -1,0 +1,39 @@
+<group>
+	<group/>
+	<X_Sampler>3</X_Sampler>
+	<Y_Sampler>3</Y_Sampler>
+	<X_Size_Pixels_>15</X_Size_Pixels_>
+	<Y_Size_Pixels_>15</Y_Size_Pixels_>
+	<magnification_>1.59439</magnification_>
+<settings>
+		<sampler>
+			<X_Sampler>3</X_Sampler>
+			<Y_Sampler>2</Y_Sampler>
+			<X_Size_Pixels_>15</X_Size_Pixels_>
+			<Y_Size_Pixels_>15</Y_Size_Pixels_>
+			<magnification_>2.29082</magnification_>
+		<caramel_>0.84949</caramel_>
+		<show_Caramel__>1</show_Caramel__>
+			<show_samplers_bright_>1</show_samplers_bright_>
+		</sampler>
+	<mouseControlled__>0</mouseControlled__>
+		<Orbit>
+			<apply_Orbit_>1</apply_Orbit_>
+			<x_Orbit_Speed_>4.38775</x_Orbit_Speed_>
+			<y_Orbit_Speed_>10</y_Orbit_Speed_>
+		<show_trail>1</show_trail>
+			<trail_ammount_>1</trail_ammount_>
+		<trail_Ammount_>1</trail_Ammount_>
+			<trail_Size>1</trail_Size>
+			<trail_Color>200, 200, 200, 200</trail_Color>
+		</Orbit>
+	<orbit>
+			<apply_Orbit_>1</apply_Orbit_>
+			<x_Orbit_Speed_>17.8571</x_Orbit_Speed_>
+			<y_Orbit_Speed_>13.2653</y_Orbit_Speed_>
+			<show_trail>1</show_trail>
+			<trail_Ammount_>0.852041</trail_Ammount_>
+			<trail_Size>1</trail_Size>
+		</orbit>
+	</settings>
+</group>

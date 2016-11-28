@@ -7,6 +7,8 @@
 #include "ofxGui.h"
 #include "imgLoader.hpp"
 #include "pixSampler.hpp"
+#include "orbit.hpp"
+#include "toArtnet.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -27,17 +29,33 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+        void updateWindowSize();
     
     
     
     
-    void allocFbo();
+    
+    
+
     
     ImgLoader imgLoader;
     PixSampler pixSampler;
+    Orbit orbit;
     ofxOscSender sender;
+    ToArtnet toArtnet;
     
-    int cursorX, cursorY;
+
+    
+    int cursorX, cursorY, appWidth, appHeight;
+    ofVec2f cursorPos;
+    
+    ofParameter <bool> mouseControlled;
+    
+    ofxPanel gui;
+    
+    // workaround pour le pi ou la taille de l ecran nest pas mis a jour
+    bool updateWindowSizeFlag = true;
+ 
 		
 };
 

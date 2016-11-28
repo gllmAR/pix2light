@@ -1,3 +1,4 @@
+ofxArtnet
 ofxGui
 ofxOsc
 ofxThreadedImageLoader

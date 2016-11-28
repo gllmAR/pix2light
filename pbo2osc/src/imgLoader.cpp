@@ -9,10 +9,22 @@
 #include "imgLoader.hpp"
 
 void ImgLoader::setup(int width, int height){
+    canvasWidth = width;
+    canvasHeight = height;
+    
     images.resize(3);
     imgWidth.resize(3);
     imgHeight.resize(3);
-    canvasFbo.allocate(width, height, GL_RGBA);
+    canvasFbo.allocate(canvasWidth, canvasHeight, GL_RGBA);
+    
+    
+}
+
+
+void ImgLoader::resize(int width, int height){
+    canvasWidth = width;
+    canvasHeight = height;
+    canvasFbo.allocate(canvasWidth, canvasHeight, GL_RGBA);
 }
 
 
@@ -112,7 +124,7 @@ void ImgLoader::update(){
     canvasFbo.begin();
     ofClear(0);
     ofSetColor(255);
-    images[playHead].draw(0, 0, canvasFbo.getWidth() , canvasFbo.getHeight());
+    images[playHead].draw(0, 0, canvasWidth , canvasHeight);
     
     if (debug){
     // draw the array of images

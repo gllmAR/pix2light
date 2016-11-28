@@ -12,7 +12,6 @@
 
 
 #include "ofMain.h"
-
 #include "ofxThreadedImageLoader.h"
 
 
@@ -20,6 +19,7 @@ class ImgLoader {
     
 public:
     void setup(int width, int height);
+    void resize (int width, int height);
     void loadDir(string folder);
     void exit();
     void load(int id, int index);

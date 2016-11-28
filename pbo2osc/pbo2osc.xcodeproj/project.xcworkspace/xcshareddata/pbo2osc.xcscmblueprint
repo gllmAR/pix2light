@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CF2AF1108154C0ADDBDC71406C3FD70C180D520F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "CF2AF1108154C0ADDBDC71406C3FD70C180D520F" : 9223372036854775807,
+    "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AE4D2EBE-BAF3-485F-ABA5-77A408597FC5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "CF2AF1108154C0ADDBDC71406C3FD70C180D520F" : "pix2light\/",
+    "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A" : "..\/addons\/ofxArtnet"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "pbo2osc",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "pbo2osc\/pbo2osc.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hiroyuki\/ofxArtnet",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/gllmAR\/pix2light.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CF2AF1108154C0ADDBDC71406C3FD70C180D520F"
+    }
+  ]
+}

@@ -3,24 +3,66 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+    updateWindowSize();
 
-    imgLoader.setup(1920,1080);
+    imgLoader.setup(640,480);
     imgLoader.loadDir("calib");
     pixSampler.setup(2, 2, 15, 15, imgLoader.canvasFbo);
+    orbit.setup(640,480);
+    toArtnet.setup(pixSampler.xSampler, pixSampler.ySampler);
+    // Setup GUIS
+    
+
+    
+    gui.setup("Pbo2OSC");
+    gui.setName("settings");
+    gui.add(mouseControlled.set("mouseControlled  ", 1, 0, 1));
+    gui.add(&orbit.guiOrbit);
+    gui.add(&pixSampler.guiSampler);
+    
+    // GetSettings
+    gui.loadFromFile("settings.xml");
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     imgLoader.update();
-    pixSampler.update(imgLoader.canvasFbo, cursorX, cursorY);
+    cursorPos = orbit.update(cursorPos,  appWidth , appHeight, pixSampler.xSampler, pixSampler.ySampler, pixSampler.xSize, pixSampler.ySize,  pixSampler.magnification);
+    
+    pixSampler.update(imgLoader.canvasFbo, cursorPos.x, cursorPos.y);
+    toArtnet.update(pixSampler.xSampler, pixSampler.ySampler, pixSampler.xSize, pixSampler.ySize, pixSampler.samplerBrightness);
+    
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofSetColor(255);
     
-    imgLoader.canvasFbo.draw(0,0,1920,1080);
-    pixSampler.draw();
+    imgLoader.canvasFbo.draw(0,0,appWidth,appHeight);
+    ofSetColor(255);
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    orbit.draw();
+    
+    pixSampler.draw(cursorPos.x, cursorPos.y);
+    
+    
+    gui.draw();
+    if (updateWindowSizeFlag){updateWindowSize();}
+}
+//--------------------------------------------------------------
+
+void ofApp::updateWindowSize(){
+    
+    appWidth = ofGetWidth();
+    appHeight = ofGetHeight();
+    imgLoader.resize(appWidth, appHeight);
+    pixSampler.resizeResolution(imgLoader.canvasFbo);
+    orbit.resize(appWidth, appHeight);
+    
+    updateWindowSizeFlag=false;
 }
 
 //--------------------------------------------------------------
@@ -37,6 +79,15 @@ void ofApp::keyPressed(int key){
     if(key == 'p'){
         pixSampler.printBrightness();
     }
+    if(key == 'e'){
+        
+       // cout<<pixSampler.samplersBrightness[1]<<endl;
+    }
+    
+    if(key == 'f'){
+        ofToggleFullscreen();
+        updateWindowSizeFlag = true ;
+    }
 
 }
 
@@ -48,9 +99,11 @@ void ofApp::keyReleased(int key){
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
     
-    cursorX = x;
-    cursorY = y;
+    if (mouseControlled){
     
+    cursorPos.set(x,y);
+    
+    }
 
 
 }
@@ -82,8 +135,12 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+     updateWindowSizeFlag = true ;
 }
+//--------------------------------------------------------------
+
+
+
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){

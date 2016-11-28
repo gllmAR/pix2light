@@ -10,6 +10,8 @@
 #define pixSampler_hpp
 
 #include "ofMain.h"
+#include "ofxGui.h"
+
 
 class PixSampler {
 
@@ -20,17 +22,42 @@ public:
         //passer la reference du fbo a traiter et l
         //le nombre
         // le x y
+    void resizeResolution(ofFbo source);
+    void allocateFbo();
+    void checkGuiChanged();
     void update(ofFbo source, int x, int y);
-    void draw();
+    void draw(int x, int y);
     void printBrightness();
     
     
-    vector<ofFbo> samplerFbo;
-    vector<ofPixels> samplerPixels;
-    vector<int> samplersBrightness;
+    vector<ofFbo> samplerFbo; //fbo mou
+    vector<ofFbo> samplerFboH; // fbo de feedback
+    vector<ofFbo> samplerFboS; // fbo Source :
     
+    
+    vector<ofPixels> samplerPixels;
+    vector<ofPixels> samplerBrightness;
+    //vector<int> samplersBrightness;
+    //ofPixels samplersBrightness;
+    
+    
+    
+    bool allocFlag = false;
     int xSampler, ySampler, xSize, ySize, xResolution, yResolution;
     ofFbo source;
+    
+    ofxGuiGroup guiSampler;
+    
+    ofParameter <int> xSamplerGui;
+    ofParameter <int> ySamplerGui;
+    ofParameter <int> xSizeGui;
+    ofParameter <int> ySizeGui;
+    ofParameter <float> magnification;
+    ofParameter <float> caramel;
+    ofParameter <bool> showCaramel;
+    
+    ofParameter <bool> showSamplersBrightness;
+    
 
 };
 

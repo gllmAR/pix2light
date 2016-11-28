@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxGui.h"
-#include "imgLoader.hpp"
+//#include "imgLoader.hpp"
 
 #define HOST "localhost"
 #define PORT 12345
