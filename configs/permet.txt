@@ -1,0 +1,7 @@
+https://wiki.archlinux.org/index.php/Resolv.conf#DNS_in_Linux
+
+
+
+```
+drill www5.yahoo.com
+```

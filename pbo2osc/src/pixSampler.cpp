@@ -140,7 +140,12 @@ void PixSampler::update(ofFbo source, int x, int y){
             
             samplerFboS[k].begin();
             ofClear(0);
-                source.draw(-x-i*xSize+xSampler*xSize/2,
+//                source.draw(-x-i*xSize+xSampler*xSize/2,
+//                        -y-j*ySize+ySampler*ySize/2,
+//                        xResolution,
+//                        yResolution
+//                        );
+            source.draw(-x-i*xSize+xSampler*xSize/2,
                         -y-j*ySize+ySampler*ySize/2,
                         xResolution,
                         yResolution

@@ -7,10 +7,10 @@
 	<magnification_>1.59439</magnification_>
 <settings>
 		<sampler>
-			<X_Sampler>3</X_Sampler>
-			<Y_Sampler>2</Y_Sampler>
-			<X_Size_Pixels_>15</X_Size_Pixels_>
-			<Y_Size_Pixels_>15</Y_Size_Pixels_>
+			<X_Sampler>1</X_Sampler>
+			<Y_Sampler>1</Y_Sampler>
+			<X_Size_Pixels_>10</X_Size_Pixels_>
+			<Y_Size_Pixels_>5</Y_Size_Pixels_>
 			<magnification_>2.29082</magnification_>
 		<caramel_>0.84949</caramel_>
 		<show_Caramel__>1</show_Caramel__>

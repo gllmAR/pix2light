@@ -1,0 +1,11 @@
+[Match]
+Name=eth0
+
+[Network]
+DHCP=ipv4
+
+[Address]
+Address= 10.1.1.1/8
+
+[Route]
+Gateway=0.0.0.0 0.0.0.0 dhcp

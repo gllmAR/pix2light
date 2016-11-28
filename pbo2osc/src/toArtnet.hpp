@@ -17,12 +17,11 @@ class ToArtnet {
 
 public:
     void setup(int xSampler, int ySampler);
-    void update(int xSampler, int ySampler, int xSize, int ySize, vector<ofPixels> samplerPixels);
+    void update(vector<ofPixels> samplerPixels);
     void draw();
     
     ofxArtnet artnet;
     ofImage testImage;
-    ofFbo fbo;
 
 };
 

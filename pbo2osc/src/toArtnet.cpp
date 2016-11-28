@@ -10,41 +10,29 @@
 
 void ToArtnet::setup(int xSampler, int ySampler){
 
-    artnet.setup("10.0.1.1", 6454, 1);
+    // reconnect function...
+    
+    artnet.setup("10.1.1.1", 6454, 1);
     ofSetFrameRate(40);
-   // fbo.allocate(512, 1, GL_RGB);
 
 }
 
-void ToArtnet::update(int xSampler, int ySampler, int xSize, int ySize, vector<ofPixels> samplerPixels){
+void ToArtnet::update(vector<ofPixels> samplerPixels){
 
+    artnet.sendDmx("10.239.1.5", 0, 0,samplerPixels[0].getData(), 512);
     
-    //list nodes for sending
-    //   troll.sendDmx(ip, testImage.getPixels(), 512);
-    //    artnet.sendDmx("10.0.0.149", testImage.getPixels(), 512);
-    //     artnet.sendDmx("10.0.1.97", testImage.getPixels().getData(), 512);
+//    for(int i = 0; i<samplerPixels[0].size();i++){
+//        cout<<int(samplerPixels[0][i])<<" ";
+//        
+//    }
+//    cout<<endl;
     
-    
-//    artnet.sendDmx("10.0.1.97", 0, 0, testImage.getPixels().getData(), 512);
-//    artnet.sendDmx("10.0.1.97", 0, 1, testImage.getPixels().getData(), 512);
-//    artnet.sendDmx("10.0.1.97", 0, 2, testImage.getPixels().getData(), 512);
+//    for(int i = 0; i<samplerPixels.size();i++){
+//    //to do, ip address, correlation dans une liste.
+//        artnet.sendDmx("10.239.1.5", 0, i,samplerPixels[i].getData(), samplerPixels[0].size());
 //
-   // cout<<samplersBrightness.size()<<endl;
-    
-// nombre de fixture par univers  : 2
-// list des addresse des fixture
-    
-    
-    for(int i = 0; i<samplerPixels.size();i++){
-    
-        artnet.sendDmx("10.0.1.97", 0, 0,(samplerPixels[0].getData()), 512);
-
-    }
-    
-    
-    
-    
-    
+//    }
+//    
     
     
     

@@ -32,7 +32,7 @@ void ofApp::update(){
     cursorPos = orbit.update(cursorPos,  appWidth , appHeight, pixSampler.xSampler, pixSampler.ySampler, pixSampler.xSize, pixSampler.ySize,  pixSampler.magnification);
     
     pixSampler.update(imgLoader.canvasFbo, cursorPos.x, cursorPos.y);
-    toArtnet.update(pixSampler.xSampler, pixSampler.ySampler, pixSampler.xSize, pixSampler.ySize, pixSampler.samplerBrightness);
+    toArtnet.update(pixSampler.samplerBrightness);
     
 
 }
