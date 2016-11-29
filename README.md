@@ -19,6 +19,7 @@ Sur RaspberryPi, suivre ce tutoriel : http://openframeworks.cc/setup/raspberrypi
 Dans le dossier addon de OF ajouter ces dépendences 
 
 * https://github.com/kylemcdonald/ofxDmx
+* https://github.com/hiroyuki/ofxArtnet
 
 
 ## Composantes : 
@@ -38,9 +39,6 @@ requiert le addon : https://github.com/kylemcdonald/ofxDmx
 ### pix2osc
 pix2osc est une application graphique qui échantillone une ou des sous-section d'images afin d'envoyer une liste d'intensité.
 
-### manitou
-Application servant à controller le comportement temporelle  
-
 
 
 ## Déploiement 
@@ -59,6 +57,22 @@ sudo ln -s /home/artificiel/aur/of/apps/pix2light/services/*  /etc/systemd/syste
 activer les services 
 ```
 sudo systemctl daemon-reload && sudo systemctl enable dmxServer && sudo systemctl enable pix2light
+```
+
+
+addon  : necessaire : 
+
+
+
+internet à l'UQAM :
+
+```
+https://wiki.archlinux.org/index.php/Resolv.conf#DNS_in_Linux
+```
+
+Voir : pourquoi faire ça, débloque: 
+```
+drill www5.yahoo.com 
 ```
 
 

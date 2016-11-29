@@ -12,7 +12,7 @@ void ToArtnet::setup(int xSampler, int ySampler){
 
     // reconnect function...
     
-    artnet.setup("10.1.1.1", 6454, 1);
+    artnet.setup("10.1.1.1", 6454, 0);
     ofSetFrameRate(40);
 
 }
