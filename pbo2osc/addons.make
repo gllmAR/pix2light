@@ -2,3 +2,4 @@ ofxArtnet
 ofxGui
 ofxOsc
 ofxThreadedImageLoader
+ofxXmlSettings

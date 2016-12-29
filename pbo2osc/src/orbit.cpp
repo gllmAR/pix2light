@@ -18,14 +18,15 @@ void Orbit::setup(int w,int h){
     guiOrbit.add(xOrbitSpeed.set("x Orbit Speed ", 1, 0, 50));
     guiOrbit.add(yOrbitSpeed.set("y Orbit Speed ", 1, 0, 50));
     guiOrbit.add(trailShow.set("show trail", 1, 0, 1));
-    guiOrbit.add(trailAmmount.set("trail Ammount ", 0, 0, 1));
-    guiOrbit.add(trailSize.set("trail Size",1 ,0, 25 ));
+    guiOrbit.add(trailOpacity.set("trail Opacity ", 0, 0, 1));
+    guiOrbit.add(trailFuzz.set("trail Fuzz",1 ,0, 1 ));
+    guiOrbit.add(trailLength.set("trail Length",200 ,200, 100000 ));
     guiOrbit.add(trailReset.setup("trail Reset"));
 
 
     resize(w,h);
     trailReset.addListener(this, &Orbit::trailResetChanged);
-
+    trailPath.setMode(ofPath::POLYLINES);
 }
 
 ofPoint Orbit::update(ofPoint cursorPos, int w, int h, int xSampler, int ySampler, int xSamplerRes, int ySamplerRes, float magnification ) {
@@ -36,31 +37,26 @@ ofPoint Orbit::update(ofPoint cursorPos, int w, int h, int xSampler, int ySample
     
     cursorCentre.set(cursorCentreX,cursorCentreY);
     
-    // updater les fbo
-    
-    if (trailShow){
-        
-        
-        trailFbo.begin();
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-        
-        ofClear(0);
-        ofSetColor(trailAmmount*255);
-        trailFboH.draw(0,0,canvasWidth,canvasHeight);
+    trailLine.addVertex(cursorCentre);
 
-        
-        ofFill();
-        ofDrawRectangle(cursorCentre, trailSize, trailSize);
-        trailFbo.end();
-        
-        
-        trailFboH.begin();
-        ofSetColor(255);
-        ofEnableBlendMode(OF_BLENDMODE_ADD);
-        trailFbo.draw(0,0,canvasWidth,canvasHeight);
-        trailFboH.end();
+    for (auto &vert : trailLine.getVertices()){
+        vert.x += ofRandom(-0.1*trailFuzz,0.1*trailFuzz);
+        vert.y += ofRandom(-0.1*trailFuzz,0.1*trailFuzz);
         
     }
+    
+    if (trailLine.size() > trailLength){
+        
+        for (int i = 0;i<trailLine.size()-trailLength;i++){
+            trailLine.getVertices().erase(trailLine.getVertices().begin());
+        }
+        
+        
+    }
+    
+
+    
+
     
     
     // faire deriver l orbit
@@ -95,28 +91,35 @@ ofPoint Orbit::update(ofPoint cursorPos, int w, int h, int xSampler, int ySample
         return cursorPos;
     }
     
+
     
 }
 
 void Orbit::draw(){
     
-    if (trailShow){
-        trailFbo.draw(0,0,canvasWidth,canvasHeight);
+//    if (trailShow){
+//        trailFbo.draw(0,0,canvasWidth,canvasHeight);
+//    }
+    
+    if(trailShow){
+        
+        ofSetColor(trailOpacity*255, trailOpacity*255, trailOpacity*255);
+        trailLine.draw();
     }
 
 
 }
 
 void Orbit::resize(int width, int height){
-    canvasWidth = width;
-    canvasHeight = height;
-    trailFbo.allocate(canvasWidth, canvasHeight, GL_RGBA);
-    trailFboH.allocate(canvasWidth, canvasHeight, GL_RGBA);
+//    canvasWidth = width;
+//    canvasHeight = height;
+//    trailFbo.allocate(canvasWidth, canvasHeight, GL_RGBA);
+//    trailFboH.allocate(canvasWidth, canvasHeight, GL_RGBA);
 }
 
 
 void Orbit::trailResetChanged(){
-    trailFboH.begin();
-    ofClear(0);
-    trailFboH.end();
+
+    
+    trailLine.clear();
 }

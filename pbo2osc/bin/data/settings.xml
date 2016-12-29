@@ -7,11 +7,11 @@
 	<magnification_>1.59439</magnification_>
 <settings>
 		<sampler>
-			<X_Sampler>1</X_Sampler>
-			<Y_Sampler>1</Y_Sampler>
-			<X_Size_Pixels_>10</X_Size_Pixels_>
-			<Y_Size_Pixels_>5</Y_Size_Pixels_>
-			<magnification_>2.29082</magnification_>
+			<X_Sampler>3</X_Sampler>
+			<Y_Sampler>2</Y_Sampler>
+			<X_Size_Pixels_>15</X_Size_Pixels_>
+			<Y_Size_Pixels_>15</Y_Size_Pixels_>
+			<magnification_>4.18112</magnification_>
 		<caramel_>0.84949</caramel_>
 		<show_Caramel__>1</show_Caramel__>
 			<show_samplers_bright_>1</show_samplers_bright_>
@@ -32,8 +32,13 @@
 			<x_Orbit_Speed_>17.8571</x_Orbit_Speed_>
 			<y_Orbit_Speed_>13.2653</y_Orbit_Speed_>
 			<show_trail>1</show_trail>
-			<trail_Ammount_>0.852041</trail_Ammount_>
+			<trail_Ammount_>0.255102</trail_Ammount_>
 			<trail_Size>1</trail_Size>
+		<trail_Fuzz>0.132653</trail_Fuzz>
+		<trail_Length>200</trail_Length>
 		</orbit>
+	<artnet>
+			<Send_artnet>0</Send_artnet>
+		</artnet>
 	</settings>
 </group>

@@ -64,10 +64,12 @@ void PixSampler::allocateFbo(){
     
     // allocation
     for (int i = 0; i < samplerFbo.size();i++){
-        samplerFbo[i].allocate(xSize, ySize);
-        samplerFboH[i].allocate(xSize, ySize);
-        samplerFboS[i].allocate(xSize, ySize);
+        samplerFbo[i].allocate(xSize, ySize,  GL_RGBA);
+        samplerFboH[i].allocate(xSize, ySize, GL_RGBA);
+        samplerFboS[i].allocate(xSize, ySize, GL_RGBA);
         samplerBrightness[i].allocate(xSize, ySize, OF_IMAGE_GRAYSCALE);
+        
+
 
     }
     
@@ -94,7 +96,7 @@ void PixSampler::allocateFbo(){
             
         }
     }
-    
+    allocFlag = false;
 }
 
 void PixSampler::checkGuiChanged(){
@@ -118,84 +120,61 @@ void PixSampler::checkGuiChanged(){
 }
 
 
-void PixSampler::update(ofFbo source, int x, int y){
+void PixSampler::update(ofFbo source, int posX, int posY){
     
     checkGuiChanged();
     
     if (allocFlag){allocateFbo();}
-        
+    
+
 // passer a travers tout les x sampler et les y sampler dans l ordre
     // pour allouer la bonne partie d image (offset)
-    //
-    
-    
-    // convertir les fbo en pixel
-   
     for (int i = 0; i<xSampler; i++){
         for (int j = 0; j<ySampler; j++){
             int k =j+ySampler*i;
             
-            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-            ofSetColor(255,255,255,255);
+
             
+            
+            // init et calcul de la surface a sampler
             samplerFboS[k].begin();
-            ofClear(0);
-//                source.draw(-x-i*xSize+xSampler*xSize/2,
-//                        -y-j*ySize+ySampler*ySize/2,
-//                        xResolution,
-//                        yResolution
-//                        );
-            source.draw(-x-i*xSize+xSampler*xSize/2,
-                        -y-j*ySize+ySampler*ySize/2,
-                        xResolution,
-                        yResolution
-                        );
+               // ofClear(0);
+                source.draw(-posX-i*xSize,
+                            -posY-j*ySize,
+                            xResolution,
+                            yResolution);
             samplerFboS[k].end();
-            
-            ofEnableBlendMode(OF_BLENDMODE_ADD);
-            ofSetColor(255);
-            
-            samplerFbo[k].begin();
-           
-            ofClear(0);
-            
-            samplerFboH[k].draw(0,0,xSize,ySize);
-            samplerFboS[k].draw(0,0,xSize,ySize);
-            
-            //samplerFbo[k].draw(0,0,xSize,ySize);
-
-
-            samplerFbo[k].end();
-   
-            
+         
         
-            ofEnableBlendMode(OF_BLENDMODE_ADD);
-            ofSetColor(255);
+            samplerFbo[k].begin();
+                ofSetColor(255, 255, 255, 255);
+            
+                samplerFboS[k].draw(0,0,xSize,ySize);
+                samplerFboH[k].draw(0,0,xSize,ySize);
+            samplerFbo[k].end();
+            
             
             samplerFboH[k].begin();
-            
-            samplerFbo[k].draw(0,0,xSize,ySize);
+            ofSetColor(0, 0, 0, (1-caramel)*255);
+            ofDrawRectangle(0, 0, xSize, ySize);
+            ofSetColor(255, 255, 255, caramel*255);
+            samplerFbo[k].draw(0,0, xSize,ySize);
+            //samplerFboH[k].draw(0,0, xSize,ySize);
             samplerFboH[k].end();
+
+
             
-            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    
-            
-// lire le brightness dans les pixels
-            // faire un gros tas de donne
-            
+            //read le fbo actuel en pixels
             samplerFbo[k].readToPixels(samplerPixels[k]);
             
+            // convertir en brightness et storer dans samplerbrightness
             for (int m = 0; m<xSize*ySize;m++){
-                //samplersBrightness[m+xSize*ySize*k]=
                 samplerBrightness[k][m]=
                     (samplerPixels[k][m*4]+
                      samplerPixels[k][m*4+1]+
                      samplerPixels[k][m*4+2])/3;
             }
-          
-            
         }
-
     }
 }
 
@@ -208,6 +187,7 @@ void PixSampler::draw(int x, int y){
     for (int i = 0; i<xSampler; i++){
         for (int j = 0; j<ySampler; j++){
              int k =j+ySampler*i;
+            
             if(showCaramel){
             samplerFbo[k].draw(x+i*xSize*magnification,y+j*ySize*magnification,xSize*magnification,ySize*magnification);
             }else{
@@ -239,30 +219,15 @@ void PixSampler::draw(int x, int y){
     }
     
     ofSetColor(255, 255, 255, 255);
-     samplerFboH[0].draw(10,10, 100, 100);
+
     
 
 
 }
 
-void PixSampler::printBrightness(){
-    
-    // broken
 
-    for (int i = 0; i<samplerBrightness.size();i++){
-        for (int j = 0; j<samplerBrightness[i].size();j++){
-            cout<<samplerBrightness[i][j]<<endl;
-        }
-    }
-    
-    cout<<endl;
-        cout<<samplerBrightness.size()*samplerBrightness[0].size()<<endl;
-//    for (int i = 0; i<samplersBrightness.size(); i++){
-//        
-//        cout<<samplersBrightness[i]<<" ";
-//        
-//    }
-//    cout<<endl;
-//    cout<<samplersBrightness.size()<<endl;
-    
+void PixSampler::exit(){
+
+
 }
+

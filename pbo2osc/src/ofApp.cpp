@@ -10,19 +10,23 @@ void ofApp::setup(){
     imgLoader.loadDir("calib");
     pixSampler.setup(2, 2, 15, 15, imgLoader.canvasFbo);
     orbit.setup(640,480);
-    toArtnet.setup(pixSampler.xSampler, pixSampler.ySampler);
-    // Setup GUIS
     
+    // Setup classes GUIS
+    toArtnet.setupGui();
 
-    
+    // Build Gui
     gui.setup("Pbo2OSC");
     gui.setName("settings");
     gui.add(mouseControlled.set("mouseControlled  ", 1, 0, 1));
     gui.add(&orbit.guiOrbit);
     gui.add(&pixSampler.guiSampler);
+    gui.add(&toArtnet.guiArtnet);
     
     // GetSettings
     gui.loadFromFile("settings.xml");
+    
+    toArtnet.setup(pixSampler.xSampler, pixSampler.ySampler);
+
     
 }
 
@@ -48,10 +52,18 @@ void ofApp::draw(){
     
     pixSampler.draw(cursorPos.x, cursorPos.y);
     
-    
-    gui.draw();
+    if (guiShow){gui.draw();}
     if (updateWindowSizeFlag){updateWindowSize();}
 }
+//--------------------------------------------------------------
+
+void ofApp::exit(){
+    imgLoader.exit();
+    toArtnet.exit();
+    cout<<"exiting"<<endl;
+
+}
+
 //--------------------------------------------------------------
 
 void ofApp::updateWindowSize(){
@@ -76,9 +88,7 @@ void ofApp::keyPressed(int key){
         imgLoader.prev();
     }
     
-    if(key == 'p'){
-        pixSampler.printBrightness();
-    }
+
     if(key == 'e'){
         
        // cout<<pixSampler.samplersBrightness[1]<<endl;
@@ -87,6 +97,9 @@ void ofApp::keyPressed(int key){
     if(key == 'f'){
         ofToggleFullscreen();
         updateWindowSizeFlag = true ;
+    }
+    if(key == 'g'){
+        guiShow = !guiShow;
     }
 
 }

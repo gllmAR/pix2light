@@ -18,9 +18,15 @@ Sur RaspberryPi, suivre ce tutoriel : http://openframeworks.cc/setup/raspberrypi
 ## Add-on
 Dans le dossier addon de OF ajouter ces dépendences 
 
+
 * https://github.com/kylemcdonald/ofxDmx
 * https://github.com/hiroyuki/ofxArtnet
 
+```
+cd of/addons
+
+git clone https://github.com/kylemcdonald/ofxDmx && git clone https://github.com/hiroyuki/ofxArtnet
+```
 
 ## Composantes : 
 
@@ -40,6 +46,16 @@ requiert le addon : https://github.com/kylemcdonald/ofxDmx
 pix2osc est une application graphique qui échantillone une ou des sous-section d'images afin d'envoyer une liste d'intensité.
 
 
+wait to for network
+
+https://www.freedesktop.org/wiki/Software/systemd/NetworkTarget/
+```
+systemctl enable systemd-networkd-wait-online.service
+```
+
+After=network-online.target
+Wants=network-online.target
+
 
 ## Déploiement 
 
@@ -52,7 +68,7 @@ créer un utilisateur sur le
 
 installer les services lié au déploiment 
 ```
-sudo ln -s /home/artificiel/aur/of/apps/pix2light/services/*  /etc/systemd/system/ 
+sudo ln -s /home/artificiel/of/apps/pix2light/services/*  /etc/systemd/system/ 
 ```
 activer les services 
 ```
@@ -74,6 +90,9 @@ Voir : pourquoi faire ça, débloque:
 ```
 drill www5.yahoo.com 
 ```
+
+
+sudo systemctl enable systemd-networkd-wait-online.service
 
 
 

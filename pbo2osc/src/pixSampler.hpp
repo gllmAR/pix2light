@@ -1,4 +1,4 @@
-//
+;//
 //  pixSampler.hpp
 //  pbo2osc
 //
@@ -25,9 +25,12 @@ public:
     void resizeResolution(ofFbo source);
     void allocateFbo();
     void checkGuiChanged();
-    void update(ofFbo source, int x, int y);
+    void update(ofFbo source, int posX, int posY);
     void draw(int x, int y);
     void printBrightness();
+    void exit();
+    
+    void updatesFbos(ofFbo source, int posX, int posY);
     
     
     vector<ofFbo> samplerFbo; //fbo mou
@@ -42,7 +45,7 @@ public:
     
     
     
-    bool allocFlag = false;
+    bool allocFlag = true;
     int xSampler, ySampler, xSize, ySize, xResolution, yResolution;
     ofFbo source;
     
@@ -57,6 +60,8 @@ public:
     ofParameter <bool> showCaramel;
     
     ofParameter <bool> showSamplersBrightness;
+    
+    int positionX, positionY;
     
 
 };

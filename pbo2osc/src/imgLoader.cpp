@@ -144,4 +144,12 @@ void ImgLoader::update(){
 
 }
 
+void ImgLoader::exit (){
+    
+    loader.stopThread();
+    cout<<"killing ofxThreadedImageLoader thread"<<endl;
+
+}
+
+
 
