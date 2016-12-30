@@ -31,9 +31,10 @@ class Orbit {
     ofParameter <bool> applyOrbit;
     ofParameter <float> xOrbitSpeed;
     ofParameter <float> yOrbitSpeed;
+    ofParameter <float> lfoX;
+    ofParameter <float> lfoY;
     ofParameter <bool> trailShow;
     ofParameter <float> trailOpacity;
-//    ofParameter <float> trailSize;
     ofParameter <float> trailFuzz;
     ofParameter <int> trailLength;
     ofxButton trailReset;
@@ -43,11 +44,12 @@ class Orbit {
     int xPos, yPos;
     
     ofVec2f cursorCentre;
-//    ofFbo trailFbo, trailFboH;
     int canvasWidth, canvasHeight;
     
     ofPolyline trailLine;
     ofPath trailPath;
+    
+    float trailLfoX, trailLfoY;
     
     
     
