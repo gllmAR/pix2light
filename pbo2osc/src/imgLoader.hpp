@@ -31,7 +31,8 @@ public:
     void draw(int originX, int originY, int width, int height);
    
     
-
+//    void imgNextChanged();
+//    void imgPrevChanged();
     
     bool debug = false;
     

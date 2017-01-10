@@ -21,10 +21,18 @@ void ImgLoader::setup(int width, int height){
 }
 
 void ImgLoader::setupGui(){
-    imgLoaderGui.setup("image loader");
-    imgLoaderGui.setName("image loader");
-    imgLoaderGui.add(backgroundOpacity.set("background Opacity ", .1, 0, 1));
+    imgLoaderGui.setup("imgLoader");
+    imgLoaderGui.setName("imgLoader");
+    imgLoaderGui.add(imgNext.setup("next"));
+    imgLoaderGui.add(imgPrev.setup("prev"));
+    imgLoaderGui.add(backgroundOpacity.set("opacity ", .1, 0, 1));
+    
+    imgNext.addListener(this, &ImgLoader::next);
+     imgPrev.addListener(this, &ImgLoader::prev);
+
 }
+
+
 
 
 void ImgLoader::resize(int width, int height){

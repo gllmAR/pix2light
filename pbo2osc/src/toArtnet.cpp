@@ -10,10 +10,10 @@
 
 void ToArtnet::setupGui(){
    // guiArtnet.add
-    guiArtnet.setup("Artnet");
+    guiArtnet.setup("artnet");
     guiArtnet.setName("artnet");
-    guiArtnet.add(sendArtnet.set("Send artnet",1, 0, 1));
-    guiArtnet.add(showBrightness.set("show brightness ", 1, 0, 1));
+    guiArtnet.add(sendArtnet.set("sendArtnet",1, 0, 1));
+    guiArtnet.add(showBrightness.set("showBrightness ", 1, 0, 1));
     guiArtnet.add(showBrightnessOpacity.set("opacity", .2, 0 , 1));
                   
 

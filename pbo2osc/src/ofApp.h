@@ -9,6 +9,8 @@
 #include "pixSampler.hpp"
 #include "orbit.hpp"
 #include "toArtnet.hpp"
+#include "ofxOscParameterSync.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -34,11 +36,7 @@ class ofApp : public ofBaseApp{
     
     bool guiShow = false;
     
-    
-    
-    
-    
-    
+    ofxOscParameterSync sync;
 
     
     ImgLoader imgLoader;

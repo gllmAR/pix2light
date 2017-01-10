@@ -37,15 +37,14 @@ void PixSampler::setupGui(){
     
     guiSampler.setup("Sampler");
     guiSampler.setName("sampler");
-    guiSampler.add(xSamplerGui.set("X Sampler", 1, 1, 15));
-    guiSampler.add(ySamplerGui.set("Y Sampler", 1, 1, 15));
-    guiSampler.add(xSizeGui.set("X Size Pixels ", 15, 1, 100));
-    guiSampler.add(ySizeGui.set("Y Size Pixels ", 15, 1, 100));
-    guiSampler.add(magnification.set("magnification ", 10, 0.5, 20));
-    guiSampler.add(caramel.set("caramel ", 0.5, 0.5, 1));
-    guiSampler.add(showCaramel.set("show Caramel ", 1, 0, 1));
-    guiSampler.add(pixSamplerOpacity.set("opacity ", 1, 0., 1.));
-
+    guiSampler.add(xSamplerGui.set("samplerX", 1, 1, 15));
+    guiSampler.add(ySamplerGui.set("samplerY", 1, 1, 15));
+    guiSampler.add(xSizeGui.set("pixelX", 15, 1, 100));
+    guiSampler.add(ySizeGui.set("pixelY", 15, 1, 100));
+    guiSampler.add(magnification.set("magnification", 10, 0.5, 20));
+    guiSampler.add(showCaramel.set("showCaramel", 1, 0, 1));
+    guiSampler.add(caramel.set("caramel", 0.5, 0.5, 1));
+    guiSampler.add(pixSamplerOpacity.set("opacity", 1, 0., 1.));
 }
 
 

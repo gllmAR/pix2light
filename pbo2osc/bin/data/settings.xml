@@ -15,6 +15,14 @@
 		<caramel_>0.966837</caramel_>
 		<show_Caramel__>1</show_Caramel__>
 			<show_samplers_bright_>1</show_samplers_bright_>
+		<samplerX>6</samplerX>
+			<samplerY>1</samplerY>
+			<pixelX>15</pixelX>
+			<pixelY>15</pixelY>
+			<magnification>3.68367</magnification>
+			<showCaramel>1</showCaramel>
+			<caramel>0.979592</caramel>
+			<opacity>0.678571</opacity>
 		</sampler>
 	<mouseControlled__>0</mouseControlled__>
 		<Orbit>
@@ -39,12 +47,30 @@
 		<LFO_Oscillation_X_>0.000663265</LFO_Oscillation_X_>
 			<LFO_Oscillation_Y_>0.000918367</LFO_Oscillation_Y_>
 			<trail_Opacity_>0.0408163</trail_Opacity_>
+		<active>1</active>
+			<speedX>1.78571</speedX>
+			<speedY>2.04082</speedY>
+			<lfoX>0.000357143</lfoX>
+			<lfoY>0.000816326</lfoY>
 		</orbit>
 	<artnet>
 			<Send_artnet>0</Send_artnet>
+		<sendArtnet>0</sendArtnet>
+			<showBrightness_>1</showBrightness_>
+			<opacity>0.112245</opacity>
 		</artnet>
 	<image_loader>
 			<background_Opacity_>0.102041</background_Opacity_>
 		</image_loader>
+	<mouseCtl>0</mouseCtl>
+		<imgLoader>
+			<opacity_>0.117347</opacity_>
+		</imgLoader>
+		<trail>
+			<show>1</show>
+			<length>46535</length>
+			<fuzz>1</fuzz>
+			<opacity>0.229592</opacity>
+		</trail>
 	</settings>
 </group>

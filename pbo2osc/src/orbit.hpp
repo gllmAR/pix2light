@@ -34,6 +34,8 @@ class Orbit {
     ofParameter <float> yOrbitSpeed;
     ofParameter <float> lfoX;
     ofParameter <float> lfoY;
+    
+    ofxGuiGroup guiTrail;
     ofParameter <bool> trailShow;
     ofParameter <float> trailOpacity;
     ofParameter <float> trailFuzz;

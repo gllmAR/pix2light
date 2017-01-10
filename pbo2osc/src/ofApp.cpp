@@ -21,10 +21,11 @@ void ofApp::setup(){
     // Build Gui
     gui.setup("Pbo2OSC");
     gui.setName("settings");
-    gui.add(mouseControlled.set("mouseControlled  ", 1, 0, 1));
+    gui.add(mouseControlled.set("mouseCtl", 1, 0, 1));
     
     gui.add(&imgLoader.imgLoaderGui);
     gui.add(&orbit.guiOrbit);
+    gui.add(&orbit.guiTrail);
     gui.add(&pixSampler.guiSampler);
     gui.add(&toArtnet.guiArtnet);
     
@@ -32,6 +33,9 @@ void ofApp::setup(){
     gui.loadFromFile("settings.xml");
     
     toArtnet.setup(pixSampler.xSampler, pixSampler.ySampler);
+
+    // setup Sync
+    sync.setup((ofParameterGroup&)gui.getParameter(),6666,"localhost",6667);
 
     
 }
@@ -44,6 +48,7 @@ void ofApp::update(){
     pixSampler.update(imgLoader.canvasFbo, cursorPos.x, cursorPos.y);
     toArtnet.update(pixSampler.samplerBrightness);
     
+    sync.update();
 
 }
 

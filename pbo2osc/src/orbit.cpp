@@ -14,18 +14,19 @@ void Orbit::setup(int w,int h){
     
     guiOrbit.setup("orbit");
     guiOrbit.setName("orbit");
-    guiOrbit.add(applyOrbit.set("apply Orbit ", 1, 0, 1));
-    guiOrbit.add(xOrbitSpeed.set("x Orbit Speed ", 1, 0, 50));
-    guiOrbit.add(yOrbitSpeed.set("y Orbit Speed ", 1, 0, 50));
-    guiOrbit.add(lfoX.set("LFO X ", 0, 0, 0.01));
-    guiOrbit.add(lfoY.set("LFO Y ", 0, 0, 0.01));
-    guiOrbit.add(trailShow.set("show trail", 1, 0, 1));
-    guiOrbit.add(trailReset.setup("trail Reset"));
-    guiOrbit.add(trailLength.set("trail Length",200 ,200, 100000 ));
-    guiOrbit.add(trailOpacity.set("trail Opacity ", 0, 0, 1));
-    guiOrbit.add(trailFuzz.set("trail Fuzz",1 ,0, 1 ));
-
-
+    guiOrbit.add(applyOrbit.set("active", 1, 0, 1));
+    guiOrbit.add(xOrbitSpeed.set("speedX", 1, 0, 50));
+    guiOrbit.add(yOrbitSpeed.set("speedY", 1, 0, 50));
+    guiOrbit.add(lfoX.set("lfoX", 0, 0, 0.01));
+    guiOrbit.add(lfoY.set("lfoY", 0, 0, 0.01));
+    
+    guiTrail.setup("trail");
+    guiTrail.setName("trail");
+    guiTrail.add(trailShow.set("show", 1, 0, 1));
+    guiTrail.add(trailReset.setup("reset"));
+    guiTrail.add(trailLength.set("length",200 ,200, 100000 ));
+    guiTrail.add(trailFuzz.set("fuzz",1 ,0, 1 ));
+    guiTrail.add(trailOpacity.set("opacity", 0, 0, 1));
 
 
     resize(w,h);
