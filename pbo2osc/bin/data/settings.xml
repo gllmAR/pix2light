@@ -43,5 +43,8 @@
 	<artnet>
 			<Send_artnet>0</Send_artnet>
 		</artnet>
+	<image_loader>
+			<background_Opacity_>0.102041</background_Opacity_>
+		</image_loader>
 	</settings>
 </group>

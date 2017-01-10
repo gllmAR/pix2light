@@ -23,7 +23,16 @@ void PixSampler::setup(int xSamplerSetup, int ySamplerSetup, int xSizeSetup, int
     
     xResolution = source.getWidth();
     yResolution = source.getHeight();
+
     
+    // alloc
+    allocateFbo();
+    
+
+    
+}
+
+void PixSampler::setupGui(){
     // gui group
     
     guiSampler.setup("Sampler");
@@ -34,16 +43,11 @@ void PixSampler::setup(int xSamplerSetup, int ySamplerSetup, int xSizeSetup, int
     guiSampler.add(ySizeGui.set("Y Size Pixels ", 15, 1, 100));
     guiSampler.add(magnification.set("magnification ", 10, 0.5, 20));
     guiSampler.add(caramel.set("caramel ", 0.5, 0.5, 1));
-    guiSampler.add(showCaramel.set("show Caramel  ", 1, 0, 1));
-    guiSampler.add(showSamplersBrightness.set("show samplers bright ", 1, 0, 1));
-    
-
-    
-    // alloc
-    allocateFbo();
-    
+    guiSampler.add(showCaramel.set("show Caramel ", 1, 0, 1));
+    guiSampler.add(pixSamplerOpacity.set("opacity ", 1, 0., 1.));
 
 }
+
 
 void PixSampler::resizeResolution(ofFbo source){
 
@@ -180,8 +184,9 @@ void PixSampler::update(ofFbo source, int posX, int posY){
 
 void PixSampler::draw(int x, int y){
     
- 
-    ofSetColor(255,255,255,255);
+    ofPushStyle();
+    
+    ofSetColor(pixSamplerOpacity*255);
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     
     for (int i = 0; i<xSampler; i++){
@@ -196,30 +201,9 @@ void PixSampler::draw(int x, int y){
         }
     }
     
-    if(showSamplersBrightness){
-        ofEnableBlendMode(OF_BLENDMODE_SCREEN);
-        
-        float rectWidth = float(xResolution)/float(samplerBrightness.size()*samplerBrightness[0].size());
-        
-        ofFill();
-        ofSetColor(127,127,127,127);
-        
-        for (int i = 0; i<samplerBrightness.size();i++){
-            for (int j = 0; j<samplerBrightness[i].size();j++){
-                ofDrawRectangle(
-                    i*rectWidth*samplerBrightness[i].size()+ j*rectWidth,yResolution-samplerBrightness[i][j],
-                    rectWidth,
-                    samplerBrightness[i][j]);
-            }
-        }
-
-        ofNoFill();
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-
-    }
-    
-    ofSetColor(255, 255, 255, 255);
-
+    ofPopStyle();
+    ofSetColor(255);
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     
 
 

@@ -13,12 +13,14 @@
 
 #include "ofMain.h"
 #include "ofxThreadedImageLoader.h"
+#include "ofxGui.h"
 
 
 class ImgLoader {
     
 public:
     void setup(int width, int height);
+    void setupGui();
     void resize (int width, int height);
     void loadDir(string folder);
     void exit();
@@ -26,7 +28,7 @@ public:
     void next();
     void prev();
     void update();
-    void draw();
+    void draw(int originX, int originY, int width, int height);
    
     
 
@@ -57,6 +59,11 @@ public:
     ofxThreadedImageLoader loader;
     vector<string> imagePath;
   
+    ofxGuiGroup imgLoaderGui;
+   
+    ofParameter <float> backgroundOpacity;
+    ofxButton imgNext;
+    ofxButton imgPrev;
     
     
     

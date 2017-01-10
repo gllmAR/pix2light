@@ -21,7 +21,8 @@ public:
     void setupGui();
     void setup(int xSampler, int ySampler);
     void update(vector<ofPixels> samplerPixels);
-    void draw();
+    void draw(vector<ofPixels> samplerPixels);
+    void resize(int sizeX, int sizeY);
     void exit();
     
     ofxArtnet artnet;
@@ -34,7 +35,10 @@ public:
     vector<string> fixturesIP;
     
     ofParameter<bool> sendArtnet;
+    ofParameter<bool>  showBrightness;
+    ofParameter<float>  showBrightnessOpacity;
     
+    int resolutionX = 600, resolutionY = 600;
     
     
 private:

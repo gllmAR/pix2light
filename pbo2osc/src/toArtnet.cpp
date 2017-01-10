@@ -13,6 +13,9 @@ void ToArtnet::setupGui(){
     guiArtnet.setup("Artnet");
     guiArtnet.setName("artnet");
     guiArtnet.add(sendArtnet.set("Send artnet",1, 0, 1));
+    guiArtnet.add(showBrightness.set("show brightness ", 1, 0, 1));
+    guiArtnet.add(showBrightnessOpacity.set("opacity", .2, 0 , 1));
+                  
 
 }
 
@@ -75,8 +78,36 @@ void ToArtnet::update(vector<ofPixels> samplerPixels){
 }
 
 
-void ToArtnet::draw(){
-// pourrait etre pertinant de mettre le les rectangles icitte.
+void ToArtnet::draw(vector<ofPixels> samplerPixels){
+    
+    if(showBrightness){
+        ofPushStyle();
+        ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+        
+        float rectWidth = float(resolutionX)/float(samplerPixels.size()*samplerPixels[0].size());
+        
+        ofFill();
+        ofSetColor(showBrightnessOpacity*255);
+        
+        for (int i = 0; i<samplerPixels.size();i++){
+            for (int j = 0; j<samplerPixels[i].size();j++){
+                ofDrawRectangle(
+                                i*rectWidth*samplerPixels[i].size()+ j*rectWidth,resolutionY-samplerPixels[i][j],
+                                rectWidth,
+                                samplerPixels[i][j]);
+            }
+        }
+        ofPopStyle();
+        
+    }
+    
+
+}
+
+void ToArtnet::resize(int sizeX, int sizeY){
+
+    resolutionX = sizeX;
+    resolutionY = sizeY;
 
 }
 

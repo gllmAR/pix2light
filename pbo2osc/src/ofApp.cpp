@@ -6,18 +6,24 @@ void ofApp::setup(){
     
     updateWindowSize();
 
+    // setups Classes
+    
     imgLoader.setup(640,480);
     imgLoader.loadDir("calib");
     pixSampler.setup(2, 2, 15, 15, imgLoader.canvasFbo);
     orbit.setup(640,480);
     
-    // Setup classes GUIS
+    // Setup GUIS
+    pixSampler.setupGui();
     toArtnet.setupGui();
+    imgLoader.setupGui();
 
     // Build Gui
     gui.setup("Pbo2OSC");
     gui.setName("settings");
     gui.add(mouseControlled.set("mouseControlled  ", 1, 0, 1));
+    
+    gui.add(&imgLoader.imgLoaderGui);
     gui.add(&orbit.guiOrbit);
     gui.add(&pixSampler.guiSampler);
     gui.add(&toArtnet.guiArtnet);
@@ -43,14 +49,13 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetColor(255);
-    
-    imgLoader.canvasFbo.draw(0,0,appWidth,appHeight);
+    imgLoader.draw(0,0,appWidth,appHeight);
     ofSetColor(255);
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     orbit.draw();
     
     pixSampler.draw(cursorPos.x, cursorPos.y);
+    toArtnet.draw(pixSampler.samplerBrightness);
     
     if (guiShow){gui.draw();}
     if (updateWindowSizeFlag){updateWindowSize();}
@@ -73,6 +78,7 @@ void ofApp::updateWindowSize(){
     imgLoader.resize(appWidth, appHeight);
     pixSampler.resizeResolution(imgLoader.canvasFbo);
     orbit.resize(appWidth, appHeight);
+    toArtnet.resize(appWidth, appHeight);
     
     updateWindowSizeFlag=false;
 }

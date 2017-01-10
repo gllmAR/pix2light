@@ -20,6 +20,12 @@ void ImgLoader::setup(int width, int height){
     
 }
 
+void ImgLoader::setupGui(){
+    imgLoaderGui.setup("image loader");
+    imgLoaderGui.setName("image loader");
+    imgLoaderGui.add(backgroundOpacity.set("background Opacity ", .1, 0, 1));
+}
+
 
 void ImgLoader::resize(int width, int height){
     canvasWidth = width;
@@ -143,6 +149,16 @@ void ImgLoader::update(){
    
 
 }
+
+
+
+void ImgLoader::draw(int originX, int originY, int width, int height){
+    
+    ofSetColor(255*backgroundOpacity);
+    canvasFbo.draw(originX,originY,width,height);
+    
+}
+
 
 void ImgLoader::exit (){
     

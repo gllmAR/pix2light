@@ -15,6 +15,11 @@ Sur RaspberryPi, suivre ce tutoriel : http://openframeworks.cc/setup/raspberrypi
 * je favorise  l'usage d'archlinux de manière à limiter le nombre de logiciel inutile installé d'avance.  	
  
  
+## configuration raspberry pi 
+sudo nano /boot/config.txt
+
+gpu_mem=256 
+ 
 ## Add-on
 Dans le dossier addon de OF ajouter ces dépendences 
 

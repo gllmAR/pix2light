@@ -17,13 +17,15 @@ void Orbit::setup(int w,int h){
     guiOrbit.add(applyOrbit.set("apply Orbit ", 1, 0, 1));
     guiOrbit.add(xOrbitSpeed.set("x Orbit Speed ", 1, 0, 50));
     guiOrbit.add(yOrbitSpeed.set("y Orbit Speed ", 1, 0, 50));
-    guiOrbit.add(lfoX.set("LFO Oscillation X ", 0, 0, 0.01));
-    guiOrbit.add(lfoY.set("LFO Oscillation Y ", 0, 0, 0.01));
+    guiOrbit.add(lfoX.set("LFO X ", 0, 0, 0.01));
+    guiOrbit.add(lfoY.set("LFO Y ", 0, 0, 0.01));
     guiOrbit.add(trailShow.set("show trail", 1, 0, 1));
+    guiOrbit.add(trailReset.setup("trail Reset"));
+    guiOrbit.add(trailLength.set("trail Length",200 ,200, 100000 ));
     guiOrbit.add(trailOpacity.set("trail Opacity ", 0, 0, 1));
     guiOrbit.add(trailFuzz.set("trail Fuzz",1 ,0, 1 ));
-    guiOrbit.add(trailLength.set("trail Length",200 ,200, 100000 ));
-    guiOrbit.add(trailReset.setup("trail Reset"));
+
+
 
 
     resize(w,h);

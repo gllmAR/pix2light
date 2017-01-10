@@ -18,10 +18,12 @@ class PixSampler {
 public:
     
     void setup(int xSampler, int ySampler, int xSize, int ySize, ofFbo source);
+    
         //resolution
         //passer la reference du fbo a traiter et l
         //le nombre
         // le x y
+    void setupGui();
     void resizeResolution(ofFbo source);
     void allocateFbo();
     void checkGuiChanged();
@@ -58,8 +60,8 @@ public:
     ofParameter <float> magnification;
     ofParameter <float> caramel;
     ofParameter <bool> showCaramel;
+    ofParameter <float> pixSamplerOpacity;
     
-    ofParameter <bool> showSamplersBrightness;
     
     int positionX, positionY;
     
