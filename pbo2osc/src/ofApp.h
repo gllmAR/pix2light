@@ -33,6 +33,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
         void updateWindowSize();
+        void takeScreenShot();
     
     bool guiShow = false;
     
@@ -45,14 +46,18 @@ class ofApp : public ofBaseApp{
     ofxOscSender sender;
     ToArtnet toArtnet;
     
-
+    ofImage screenGrab;
+    
+   // bool screenShotFlag = false;
     
     int cursorX, cursorY, appWidth, appHeight;
     ofVec2f cursorPos;
     
-    ofParameter <bool> mouseControlled;
+    
     
     ofxPanel gui;
+    ofParameter <bool> mouseControlled;
+    ofParameter <bool> screenShotFlag;
     
     // workaround pour le pi ou la taille de l ecran nest pas mis a jour
     bool updateWindowSizeFlag = true;

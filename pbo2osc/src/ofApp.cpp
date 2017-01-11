@@ -22,6 +22,7 @@ void ofApp::setup(){
     gui.setup("Pbo2OSC");
     gui.setName("settings");
     gui.add(mouseControlled.set("mouseCtl", 1, 0, 1));
+    gui.add(screenShotFlag.set("screenShot", 0, 0, 1));
     
     gui.add(&imgLoader.imgLoaderGui);
     gui.add(&orbit.guiOrbit);
@@ -62,7 +63,13 @@ void ofApp::draw(){
     pixSampler.draw(cursorPos.x, cursorPos.y);
     toArtnet.draw(pixSampler.samplerBrightness);
     
-    if (guiShow){gui.draw();}
+    if (screenShotFlag){takeScreenShot();}
+    if (guiShow){
+        gui.draw();
+        ofShowCursor();
+    } else {
+        ofHideCursor();
+    }
     if (updateWindowSizeFlag){updateWindowSize();}
 }
 //--------------------------------------------------------------
@@ -112,12 +119,28 @@ void ofApp::keyPressed(int key){
     if(key == 'g'){
         guiShow = !guiShow;
     }
+    
+    if(key == 'x'){
+        screenShotFlag = true;
+            }
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 
+}
+
+
+//--------------------------------------------------------------
+
+void ofApp::takeScreenShot(){
+//    screenGrab.grabScreen(0, 0 , ofGetWidth(), ofGetHeight());
+    // bug avec le fullscreen
+    screenGrab.grabScreen(0, 0 ,1920, ofGetHeight());
+    cout<<ofGetTimestampString()<<endl;
+    screenGrab.save("screenShots/"+(ofGetTimestampString()+".png"));
+    screenShotFlag = false;
 }
 
 //--------------------------------------------------------------
