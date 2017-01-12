@@ -28,6 +28,8 @@ class Orbit {
     
     void trailResetChanged();
     
+    void shuffle();
+    
     ofxGuiGroup guiOrbit;
     ofParameter <bool> applyOrbit;
     ofParameter <float> xOrbitSpeed;
@@ -40,6 +42,8 @@ class Orbit {
     ofParameter <float> trailOpacity;
     ofParameter <float> trailFuzz;
     ofParameter <int> trailLength;
+    ofParameter <float> shuffleRange;
+    ofxButton shuffleLfo;
     ofxButton trailReset;
     
     

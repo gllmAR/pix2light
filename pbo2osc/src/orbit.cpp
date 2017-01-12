@@ -17,8 +17,11 @@ void Orbit::setup(int w,int h){
     guiOrbit.add(applyOrbit.set("active", 1, 0, 1));
     guiOrbit.add(xOrbitSpeed.set("speedX", 1, 0, 50));
     guiOrbit.add(yOrbitSpeed.set("speedY", 1, 0, 50));
-    guiOrbit.add(lfoX.set("lfoX", 0, 0, 0.01));
-    guiOrbit.add(lfoY.set("lfoY", 0, 0, 0.01));
+    guiOrbit.add(lfoX.set("lfoX", 0, -0.01, 0.01));
+    guiOrbit.add(lfoY.set("lfoY", 0, -0.01, 0.01));
+    guiOrbit.add(shuffleLfo.setup("shuffleLfo"));
+    shuffleLfo.addListener(this, &Orbit::shuffle);
+    guiOrbit.add(shuffleRange.set("shuffleRange", 0.01, 0.0, 1.0));
     
     guiTrail.setup("trail");
     guiTrail.setName("trail");
@@ -110,4 +113,11 @@ void Orbit::resize(int width, int height){
 
 void Orbit::trailResetChanged(){
     trailLine.clear();
+}
+
+void Orbit::shuffle(){
+    float calculLfoX = lfoX + ofRandom(-1., 1.)*shuffleRange*0.01;
+    lfoX = ofClamp(calculLfoX, -0.01, 0.01);
+    float calculLfoY = lfoY + ofRandom(-1., 1.)*shuffleRange*0.01;
+    lfoY = ofClamp(calculLfoY, -0.01, 0.01);
 }

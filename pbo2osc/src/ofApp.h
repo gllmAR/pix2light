@@ -34,6 +34,7 @@ class ofApp : public ofBaseApp{
     
         void updateWindowSize();
         void takeScreenShot();
+    void savePreset();
     
     bool guiShow = false;
     
@@ -56,8 +57,10 @@ class ofApp : public ofBaseApp{
     
     
     ofxPanel gui;
+    ofxGuiGroup settings;
     ofParameter <bool> mouseControlled;
     ofParameter <bool> screenShotFlag;
+    ofxButton savePresetToXml;
     
     // workaround pour le pi ou la taille de l ecran nest pas mis a jour
     bool updateWindowSizeFlag = true;

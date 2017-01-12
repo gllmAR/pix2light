@@ -18,26 +18,34 @@ void ofApp::setup(){
     toArtnet.setupGui();
     imgLoader.setupGui();
 
-    // Build Gui
-    gui.setup("Pbo2OSC");
-    gui.setName("settings");
-    gui.add(mouseControlled.set("mouseCtl", 1, 0, 1));
-    gui.add(screenShotFlag.set("screenShot", 0, 0, 1));
+    // build settings guiGroup
+    settings.setup("settings");
+    settings.setName("settings");
+    settings.add(savePresetToXml.setup("savePreset"));
+    savePresetToXml.addListener(this, &ofApp::savePreset);
+    settings.add(mouseControlled.set("mouseCtl", 1, 0, 1));
+    settings.add(screenShotFlag.set("screenShot", 0, 0, 1));
     
+    // Build Gui
+    gui.setup("pix2light");
+    gui.setName("pix2light");
+    gui.add(&settings);
     gui.add(&imgLoader.imgLoaderGui);
     gui.add(&orbit.guiOrbit);
     gui.add(&orbit.guiTrail);
     gui.add(&pixSampler.guiSampler);
     gui.add(&toArtnet.guiArtnet);
     
-    // GetSettings
+    //  Read settings
     gui.loadFromFile("settings.xml");
     
+    // setup artnet with readed settings
     toArtnet.setup(pixSampler.xSampler, pixSampler.ySampler);
 
     // setup Sync
     sync.setup((ofParameterGroup&)gui.getParameter(),6666,"localhost",6667);
-
+    
+    // set fullscreen on start
     ofToggleFullscreen();
     updateWindowSizeFlag = true ;
 }
@@ -145,6 +153,15 @@ void ofApp::takeScreenShot(){
 }
 
 //--------------------------------------------------------------
+
+
+void ofApp::savePreset(){
+
+    gui.saveToFile("settings.xml");
+}
+//--------------------------------------------------------------
+
+
 void ofApp::mouseMoved(int x, int y ){
     
     if (mouseControlled){
