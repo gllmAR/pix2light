@@ -1,0 +1,39 @@
+<pix2light>
+	<settings>
+		<mouseCtl>0</mouseCtl>
+		<screenShot>0</screenShot>
+	</settings>
+	<imgLoader>
+		<opacity_>0.173469</opacity_>
+	</imgLoader>
+	<orbit>
+		<active>1</active>
+		<speedX>1.53061</speedX>
+		<speedY>1.78571</speedY>
+		<lfoX>0.000552337</lfoX>
+		<lfoY>0.000576286</lfoY>
+	<shuffleRange>0.01</shuffleRange>
+	</orbit>
+	<trail>
+		<show>1</show>
+		<length>47554</length>
+		<fuzz>0.872449</fuzz>
+		<opacity>0.0612245</opacity>
+	</trail>
+	<sampler>
+		<samplerX>6</samplerX>
+		<samplerY>1</samplerY>
+		<pixelX>15</pixelX>
+		<pixelY>15</pixelY>
+		<magnification>3.58418</magnification>
+		<showCaramel>1</showCaramel>
+		<caramel>0.954082</caramel>
+		<opacity>0.72449</opacity>
+	</sampler>
+	<artnet>
+		<sendArtnet>0</sendArtnet>
+		<showBrightness_>1</showBrightness_>
+		<opacity>0.102041</opacity>
+	</artnet>
+<pix2light/>
+</pix2light>
