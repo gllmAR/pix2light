@@ -38,7 +38,8 @@ void ofApp::setup(){
     // setup Sync
     sync.setup((ofParameterGroup&)gui.getParameter(),6666,"localhost",6667);
 
-    
+    ofToggleFullscreen();
+    updateWindowSizeFlag = true ;
 }
 
 //--------------------------------------------------------------
