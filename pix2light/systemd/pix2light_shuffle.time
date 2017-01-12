@@ -1,5 +1,5 @@
 [Unit]
-Description=pix2light nextimage timer
+Description=pix2light shuffle timer
 
 [Timer]
 OnCalendar= *-*-* *:*:00
