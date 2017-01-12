@@ -54,6 +54,7 @@ public:
     int frameNow = 0;
     int playHead = 0;
     int loadHead = 0;
+    
 
     
     vector<ofImage> images;
@@ -65,6 +66,9 @@ public:
     ofParameter <float> backgroundOpacity;
     ofxButton imgNext;
     ofxButton imgPrev;
+    ofParameter <bool> reloadFolder;
+    
+    string folderName;
     
     
     

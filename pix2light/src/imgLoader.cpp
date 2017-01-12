@@ -26,9 +26,10 @@ void ImgLoader::setupGui(){
     imgLoaderGui.add(imgNext.setup("next"));
     imgLoaderGui.add(imgPrev.setup("prev"));
     imgLoaderGui.add(backgroundOpacity.set("opacity ", .1, 0, 1));
+    imgLoaderGui.add(reloadFolder.set("reloadFolder",0, 0, 1));
     
     imgNext.addListener(this, &ImgLoader::next);
-     imgPrev.addListener(this, &ImgLoader::prev);
+    imgPrev.addListener(this, &ImgLoader::prev);
 
 }
 
@@ -44,9 +45,7 @@ void ImgLoader::resize(int width, int height){
 
 void ImgLoader::loadDir(string folder){
     
-    
-
-    
+    folderName = folder;
     string path = folder;
     ofDirectory dir(path);
     dir.allowExt("jpg");
@@ -134,7 +133,11 @@ void ImgLoader::prev(){
 
 void ImgLoader::update(){
     
-
+    if (reloadFolder){
+        loadDir(folderName);
+        reloadFolder = false;
+    }
+    
     canvasFbo.begin();
     ofClear(0);
     ofSetColor(255);
