@@ -1,0 +1,13 @@
+[Unit]
+Description=pix2light intersideral
+
+[Service]
+User=artificiel
+ExecStart=/home/artificiel/src/of/apps/pix2light/pix2light/bin/pix2light
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
+

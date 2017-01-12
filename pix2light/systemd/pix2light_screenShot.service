@@ -1,0 +1,7 @@
+[Unit]
+Description=pix2light take a screenshot OSC
+
+[Service]
+User=artificiel
+ExecStart=/usr/bin/sendosc 127.0.0.1 6666 /pix2light/settings/screenShot i 1
+
