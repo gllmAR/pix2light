@@ -1,0 +1,10 @@
+[Unit]
+Description=pix2light shuffle timer
+
+[Timer]
+OnCalendar= *-*-* *:*:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
