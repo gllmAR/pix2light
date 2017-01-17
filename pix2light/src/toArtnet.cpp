@@ -13,8 +13,10 @@ void ToArtnet::setupGui(){
     guiArtnet.setup("artnet");
     guiArtnet.setName("artnet");
     guiArtnet.add(sendArtnet.set("sendArtnet",1, 0, 1));
+    guiArtnet.add(outputTrim.set("outputTrim", 1, 0 , 2));
     guiArtnet.add(showBrightness.set("showBrightness ", 1, 0, 1));
     guiArtnet.add(showBrightnessOpacity.set("opacity", .2, 0 , 1));
+    
                   
 
 }
@@ -51,15 +53,14 @@ void ToArtnet::update(vector<ofPixels> samplerPixels){
     
     if(sendArtnet){
         for(int i = 0; i<totalSampler;i++){
+            //trimthe output
+            for (int j = 0; j<samplerPixels[i].size(); j++){
+                samplerPixels[i][j]=samplerPixels[i][j]*outputTrim;
+            }
+
             artnet.sendDmx(fixturesIP[i].c_str(), 0, i,samplerPixels[i].getData(), 512);
                 }
     }
-
-    
-
-    
-    
-    
 }
 
 
@@ -77,7 +78,8 @@ void ToArtnet::draw(vector<ofPixels> samplerPixels){
         for (int i = 0; i<samplerPixels.size();i++){
             for (int j = 0; j<samplerPixels[i].size();j++){
                 ofDrawRectangle(
-                                i*rectWidth*samplerPixels[i].size()+ j*rectWidth,resolutionY-samplerPixels[i][j],
+                                i*rectWidth*samplerPixels[i].size()+ j*rectWidth,
+                                resolutionY-samplerPixels[i][j],
                                 rectWidth,
                                 samplerPixels[i][j]);
             }

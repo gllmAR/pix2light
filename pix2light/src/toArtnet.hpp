@@ -37,6 +37,7 @@ public:
     ofParameter<bool> sendArtnet;
     ofParameter<bool>  showBrightness;
     ofParameter<float>  showBrightnessOpacity;
+    ofParameter<float>  outputTrim;
     
     int resolutionX = 600, resolutionY = 600;
     
