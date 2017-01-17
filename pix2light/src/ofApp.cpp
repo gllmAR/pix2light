@@ -44,7 +44,8 @@ void ofApp::setup(){
     gui.loadFromFile("settings.xml");
     
     // setup artnet with readed settings
-    toArtnet.setup(pixSampler.xSampler, pixSampler.ySampler);
+    toArtnet.setup(pixSampler.xSamplerGui, pixSampler.ySamplerGui);
+   // cout<<pixSampler.xSamplerGui<<" "<<pixSampler.ySamplerGui<<endl;
 
     // setup Sync
     sync.setup((ofParameterGroup&)gui.getParameter(),6666,"localhost",6667);

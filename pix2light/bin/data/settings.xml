@@ -32,9 +32,9 @@
 		<opacity>0.72449</opacity>
 	</sampler>
 	<artnet>
-		<sendArtnet>0</sendArtnet>
+		<sendArtnet>1</sendArtnet>
 		<showBrightness_>1</showBrightness_>
-		<opacity>0.102041</opacity>
+		<opacity>0.204082</opacity>
 	</artnet>
 <pix2light/>
 <annotation>

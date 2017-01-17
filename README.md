@@ -100,6 +100,14 @@ drill www5.yahoo.com
 sudo systemctl enable systemd-networkd-wait-online.service
 
 
+### config Elidy
+
+désactiver le animation maker 
+mapping LED en mode big Wall
+début addresse à 1 (50 par default)
+
+désactiver scan
+adressage des univers 0 1 2 3 4 5 
 
 ## todo :
 [x] pourquoi faut rouler l'application en sudo sur le pi pour avoir accès au seriel..?

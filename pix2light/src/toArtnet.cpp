@@ -47,31 +47,16 @@ void ToArtnet::setup(int xSampler, int ySampler){
 
 void ToArtnet::update(vector<ofPixels> samplerPixels){
     
-    // a tester avec des patentes qui sont sois unicaste
-    // ou bien faudra gosser sur l'addressage des universe!
+
     
     if(sendArtnet){
         for(int i = 0; i<totalSampler;i++){
-             artnet.sendDmx(fixturesIP[i].c_str(), 0, 0,samplerPixels[i].getData(), 512);
-            //cout<<int(samplerPixels[0][i])<<" ";
-    
-        }
+            artnet.sendDmx(fixturesIP[i].c_str(), 0, i,samplerPixels[i].getData(), 512);
+                }
     }
+
     
-//    artnet.sendDmx("10.239.1.5", 0, 0,samplerPixels[0].getData(), 512);
-    
-//    for(int i = 0; i<samplerPixels[0].size();i++){
-//        cout<<int(samplerPixels[0][i])<<" ";
-//        
-//    }
-//    cout<<endl;
-    
-//    for(int i = 0; i<samplerPixels.size();i++){
-//    //to do, ip address, correlation dans une liste.
-//        artnet.sendDmx("10.239.1.5", 0, i,samplerPixels[i].getData(), samplerPixels[0].size());
-//
-//    }
-//    
+
     
     
     
