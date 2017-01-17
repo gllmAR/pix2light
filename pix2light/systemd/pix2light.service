@@ -1,5 +1,7 @@
 [Unit]
 Description=pix2light intersideral
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 User=artificiel
