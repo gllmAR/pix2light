@@ -55,7 +55,7 @@ void ToArtnet::update(vector<ofPixels> samplerPixels){
         for(int i = 0; i<totalSampler;i++){
             //trimthe output
             for (int j = 0; j<samplerPixels[i].size(); j++){
-                samplerPixels[i][j]=samplerPixels[i][j]*outputTrim;
+                ofClamp(samplerPixels[i][j]=samplerPixels[i][j]*outputTrim, 0, 255);
             }
 
             artnet.sendDmx(fixturesIP[i].c_str(), 0, i,samplerPixels[i].getData(), 512);

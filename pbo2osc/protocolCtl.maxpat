@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 59.0, 104.0, 640.0, 480.0 ],
+		"rect" : [ 363.0, 115.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,13 +38,53 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-19",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 49.0, 37.0, 150.0, 47.0 ],
+					"style" : "",
+					"text" : "Ne pas envoyer de message random car ça crash le software..."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"format" : 6,
+					"id" : "obj-17",
+					"maxclass" : "flonum",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 10.0, 311.5, 50.0, 22.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-5",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 79.0, 336.5, 169.0, 22.0 ],
+					"presentation_rect" : [ 65.0, 314.5, 0.0, 0.0 ],
+					"style" : "",
+					"text" : "/pix2light/artnet/outputTrim $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-15",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 62.0, 287.5, 154.0, 22.0 ],
-					"presentation_rect" : [ 62.0, 287.5, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "/pix2light/imgLoader/next 0"
 				}
@@ -60,7 +100,6 @@
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 10.0, 180.0, 50.0, 22.0 ],
-					"presentation_rect" : [ 10.0, 180.0, 0.0, 0.0 ],
 					"style" : ""
 				}
 
@@ -73,7 +112,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 62.0, 180.0, 123.0, 22.0 ],
-					"presentation_rect" : [ 62.0, 180.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "/pix2light/trail/fuzz $1"
 				}
@@ -89,7 +127,6 @@
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 10.0, 206.0, 50.0, 22.0 ],
-					"presentation_rect" : [ 10.0, 209.0, 0.0, 0.0 ],
 					"style" : ""
 				}
 
@@ -102,7 +139,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 62.0, 206.0, 123.0, 22.0 ],
-					"presentation_rect" : [ 62.0, 209.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "/pix2light/trail/fuzz $1"
 				}
@@ -130,7 +166,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 62.0, 231.0, 139.0, 22.0 ],
-					"presentation_rect" : [ 62.0, 231.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "/pix2light/trail/opacity $1"
 				}
@@ -168,7 +203,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 62.0, 364.0, 129.0, 22.0 ],
+					"patching_rect" : [ 49.0, 410.0, 129.0, 22.0 ],
 					"style" : "",
 					"text" : "udpsend alarmpi 6666"
 				}
@@ -181,7 +216,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 62.0, 96.0, 129.0, 22.0 ],
+					"patching_rect" : [ 291.0, 379.0, 129.0, 22.0 ],
 					"style" : "",
 					"text" : "/settings/screenShot 1"
 				}
@@ -190,13 +225,14 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-4",
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 276.0, 193.0, 186.0, 22.0 ],
+					"patching_rect" : [ 276.0, 193.0, 186.0, 35.0 ],
 					"style" : "",
-					"text" : "/pix2light/orbit/lfoY 0.000741"
+					"text" : "/pix2light/artnet/outputTrim 1.357143"
 				}
 
 			}
@@ -219,7 +255,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 62.0, 140.0, 140.0, 22.0 ],
+					"patching_rect" : [ 291.0, 423.0, 140.0, 22.0 ],
 					"style" : "",
 					"text" : "udpsend 127.0.0.1 6666"
 				}
@@ -282,6 +318,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-17", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-4", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -295,6 +340,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-8", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-5", 0 ]
 				}
 
 			}
