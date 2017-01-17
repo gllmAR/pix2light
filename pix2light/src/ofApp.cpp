@@ -12,11 +12,14 @@ void ofApp::setup(){
     imgLoader.loadDir("calib");
     pixSampler.setup(2, 2, 15, 15, imgLoader.canvasFbo);
     orbit.setup(640,480);
+    annotation.setup();
+    
     
     // Setup GUIS
     pixSampler.setupGui();
     toArtnet.setupGui();
     imgLoader.setupGui();
+    annotation.setupGui();
 
     // build settings guiGroup
     settings.setup("settings");
@@ -34,6 +37,7 @@ void ofApp::setup(){
     gui.add(&orbit.guiOrbit);
     gui.add(&orbit.guiTrail);
     gui.add(&pixSampler.guiSampler);
+    gui.add(&annotation.annotationGui);
     gui.add(&toArtnet.guiArtnet);
     
     //  Read settings
@@ -44,6 +48,9 @@ void ofApp::setup(){
 
     // setup Sync
     sync.setup((ofParameterGroup&)gui.getParameter(),6666,"localhost",6667);
+    
+    // minimize gui items
+    gui.minimizeAll();
     
     // set fullscreen on start
     ofToggleFullscreen();
@@ -58,7 +65,9 @@ void ofApp::update(){
     pixSampler.update(imgLoader.canvasFbo, cursorPos.x, cursorPos.y);
     toArtnet.update(pixSampler.samplerBrightness);
     
+    annotation.update(imgLoader.actualPlayHeadName);
     sync.update();
+    
 
 }
 
@@ -71,6 +80,7 @@ void ofApp::draw(){
     
     pixSampler.draw(cursorPos.x, cursorPos.y);
     toArtnet.draw(pixSampler.samplerBrightness);
+    annotation.draw();
     
     if (screenShotFlag){takeScreenShot();}
     if (guiShow){
@@ -100,6 +110,8 @@ void ofApp::updateWindowSize(){
     pixSampler.resizeResolution(imgLoader.canvasFbo);
     orbit.resize(appWidth, appHeight);
     toArtnet.resize(appWidth, appHeight);
+    annotation.resize(appWidth, appHeight);
+    
     
     updateWindowSizeFlag=false;
 }
@@ -116,10 +128,7 @@ void ofApp::keyPressed(int key){
     }
     
 
-    if(key == 'e'){
-        
-       // cout<<pixSampler.samplersBrightness[1]<<endl;
-    }
+
     
     if(key == 'f'){
         ofToggleFullscreen();

@@ -10,6 +10,7 @@
 #include "orbit.hpp"
 #include "toArtnet.hpp"
 #include "ofxOscParameterSync.h"
+#include "annotation.hpp"
 
 
 class ofApp : public ofBaseApp{
@@ -46,6 +47,7 @@ class ofApp : public ofBaseApp{
     Orbit orbit;
     ofxOscSender sender;
     ToArtnet toArtnet;
+    Annotation annotation;
     
     ofImage screenGrab;
     

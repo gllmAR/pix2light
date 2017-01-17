@@ -16,6 +16,7 @@
 		4D42D1C01E27F0C300D555B9 /* orbit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D42D1B91E27F0C300D555B9 /* orbit.cpp */; };
 		4D42D1C11E27F0C300D555B9 /* pixSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D42D1BB1E27F0C300D555B9 /* pixSampler.cpp */; };
 		4D42D1C21E27F0C300D555B9 /* toArtnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D42D1BD1E27F0C300D555B9 /* toArtnet.cpp */; };
+		4D9FBE0D1E284BEE00844A5C /* annotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FBE0B1E284BEE00844A5C /* annotation.cpp */; };
 		510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6DEF695B88BA5FAACEAA937 /* UdpSocket.cpp */; };
 		5864AD82E20F15536D054EA3 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF49D76C45D5DB505A234880 /* ofxOscMessage.cpp */; };
 		5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */; };
@@ -109,6 +110,8 @@
 		4D42D1BC1E27F0C300D555B9 /* pixSampler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pixSampler.hpp; sourceTree = "<group>"; };
 		4D42D1BD1E27F0C300D555B9 /* toArtnet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toArtnet.cpp; sourceTree = "<group>"; };
 		4D42D1BE1E27F0C300D555B9 /* toArtnet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = toArtnet.hpp; sourceTree = "<group>"; };
+		4D9FBE0B1E284BEE00844A5C /* annotation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = annotation.cpp; sourceTree = "<group>"; };
+		4D9FBE0C1E284BEE00844A5C /* annotation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = annotation.hpp; sourceTree = "<group>"; };
 		4E95FB446A9C9C6F0DE12D75 /* OscPrintReceivedElements.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscPrintReceivedElements.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPrintReceivedElements.h; sourceTree = SOURCE_ROOT; };
 		50DF87D612C5AAE17AAFA6C0 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxXmlSettings.cpp; path = ../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp; sourceTree = SOURCE_ROOT; };
 		52AFA1F08C420992CAAAE648 /* ofxSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSlider.h; path = ../../../addons/ofxGui/src/ofxSlider.h; sourceTree = SOURCE_ROOT; };
@@ -408,6 +411,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				4D9FBE0B1E284BEE00844A5C /* annotation.cpp */,
+				4D9FBE0C1E284BEE00844A5C /* annotation.hpp */,
 				4D42D1B71E27F0C300D555B9 /* imgLoader.cpp */,
 				4D42D1B81E27F0C300D555B9 /* imgLoader.hpp */,
 				4D42D1B91E27F0C300D555B9 /* orbit.cpp */,
@@ -569,6 +574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D9FBE0D1E284BEE00844A5C /* annotation.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				9835CE7A8F2A5B83C3C6D406 /* ofxArtnet.cpp in Sources */,

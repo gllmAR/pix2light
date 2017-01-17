@@ -6,6 +6,8 @@
 //
 //
 
+// todo fixer le bug d'index quand on fait preview au lieu de next.
+
 #include "imgLoader.hpp"
 
 void ImgLoader::setup(int width, int height){
@@ -17,6 +19,7 @@ void ImgLoader::setup(int width, int height){
     imgHeight.resize(3);
     canvasFbo.allocate(canvasWidth, canvasHeight, GL_RGBA);
     
+    debug = false;
     
 }
 
@@ -59,12 +62,13 @@ void ImgLoader::loadDir(string folder){
     // storer les path des images dans un vector de string
     for (int i = 0; i < dir.size(); i++){
         imagePath.push_back (dir.getPath(i));
+        
     }
     
     for (int i = 0; i < images.size(); i++){
         loader.loadFromDisk(images[i], imagePath[(i+imagePath.size()-1)%imagePath.size()]);
         playHead = 0;
-    
+        playHeadNames[i] =imagePath[i];
     }
     
     // identifier la resolution optimale afin d allouer un fbo assez grand
@@ -89,6 +93,8 @@ void ImgLoader::next(){
     playHead = (playHead+images.size()+1)%images.size();
     loadHead = (playHead+images.size()+1)%images.size();
     loader.loadFromDisk(images[loadHead], imagePath[frameNow]);
+    playHeadNames[loadHead] =imagePath[loadHead];
+    
     
     
     lastDirection = 1;
@@ -121,6 +127,8 @@ void ImgLoader::prev(){
     playHead = (playHead+images.size()-1)%images.size();
     loadHead = (playHead+images.size()-1)%images.size();
     loader.loadFromDisk(images[loadHead], imagePath[frameNow]);
+    playHeadNames[loadHead] =imagePath[loadHead];
+    
 
     
     lastDirection = -1;
@@ -136,6 +144,13 @@ void ImgLoader::update(){
     if (reloadFolder){
         loadDir(folderName);
         reloadFolder = false;
+    }
+    
+   
+    if (oldPlayHeadIndex!=frameNow){
+        actualPlayHeadName = imagePath[(frameNow-1+frameTotal)%frameTotal];
+        actualPlayHeadName.erase(0, folderName.length()+1);
+        oldPlayHeadIndex = frameNow;
     }
     
     canvasFbo.begin();

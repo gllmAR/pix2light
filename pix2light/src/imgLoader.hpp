@@ -69,6 +69,9 @@ public:
     ofParameter <bool> reloadFolder;
     
     string folderName;
+    string playHeadNames[3];
+    string actualPlayHeadName;
+    int oldPlayHeadIndex = 5;
     
     
     

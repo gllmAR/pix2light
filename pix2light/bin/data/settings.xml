@@ -5,6 +5,7 @@
 	</settings>
 	<imgLoader>
 		<opacity_>0.173469</opacity_>
+	<reloadFolder>0</reloadFolder>
 	</imgLoader>
 	<orbit>
 		<active>1</active>
@@ -36,4 +37,11 @@
 		<opacity>0.102041</opacity>
 	</artnet>
 <pix2light/>
+<annotation>
+		<fontSize>14</fontSize>
+		<fontLetterSpacing>1.0051</fontLetterSpacing>
+		<posX>0.0204082</posX>
+		<posY>0.959184</posY>
+		<fontColor>115, 136, 140, 100</fontColor>
+	</annotation>
 </pix2light>
