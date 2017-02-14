@@ -1,0 +1,11 @@
+[Unit]
+Description=pix2light fadeOut
+
+[Service]
+User=artificiel
+ExecStart=/usr/local/bin/sendosc 127.0.0.1 6666 /pix2light/artnet/outputTrim f .1
+
+
+
+
+

@@ -11,8 +11,8 @@
 		<active>1</active>
 		<speedX>1.53061</speedX>
 		<speedY>1.78571</speedY>
-		<lfoX>0.000552337</lfoX>
-		<lfoY>0.000576286</lfoY>
+		<lfoX>0.000627325</lfoX>
+		<lfoY>0.000551627</lfoY>
 	<shuffleRange>0.01</shuffleRange>
 	</orbit>
 	<trail>
@@ -28,13 +28,14 @@
 		<pixelY>15</pixelY>
 		<magnification>3.58418</magnification>
 		<showCaramel>1</showCaramel>
-		<caramel>0.954082</caramel>
+		<caramel>0.739796</caramel>
 		<opacity>0.72449</opacity>
 	</sampler>
 	<artnet>
 		<sendArtnet>1</sendArtnet>
 		<showBrightness_>1</showBrightness_>
-		<opacity>0.204082</opacity>
+		<opacity>0.122449</opacity>
+	<outputTrim>1</outputTrim>
 	</artnet>
 <pix2light/>
 <annotation>
@@ -42,6 +43,6 @@
 		<fontLetterSpacing>1.0051</fontLetterSpacing>
 		<posX>0.0204082</posX>
 		<posY>0.959184</posY>
-		<fontColor>115, 136, 140, 100</fontColor>
+		<fontColor>140, 140, 140, 255</fontColor>
 	</annotation>
 </pix2light>

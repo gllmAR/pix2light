@@ -1,0 +1,13 @@
+[Unit]
+Description=pbo2Osc
+
+[Service]
+User=artificiel
+ExecStart=/home/artificiel/src/of/apps/pix2light/pbo2osc/bin/pbo2osc
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
+
