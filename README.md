@@ -108,6 +108,7 @@ début addresse à 1 (50 par default)
 
 désactiver scan
 adressage des univers 0 1 2 3 4 5 
+c'est quand même unicast.
 
 ## todo :
 [x] pourquoi faut rouler l'application en sudo sur le pi pour avoir accès au seriel..?

@@ -4,9 +4,12 @@
 void ofApp::setup(){
     //at first you must specify the Ip address of this machine
 //    artnet.setup("10.0.0.4"); //make sure the firewall is deactivated at this point
-    artnet.setup("10.0.1.1", 6454, 0);
+//    artnet.setup("10.0.1.1", 6454, 0);
+//     artnet.setup("10.0.0.1", 6454, 0);
+    artnet.setup("192.168.47.101");
     ofSetFrameRate(40);
     fbo.allocate(512, 1, GL_RGB);
+
 }
 
 //--------------------------------------------------------------
@@ -26,15 +29,24 @@ void ofApp::update(){
         fbo.readToPixels(testImage.getPixelsRef());
     }
     
+    
+    artnet.sendDmx("192.168.47.102", 0, 0, testImage.getPixels().getData(), 512);
+    artnet.sendDmx("192.168.47.102", 0, 1, testImage.getPixels().getData(), 512);
+    artnet.sendDmx("192.168.47.102", 1, 1, testImage.getPixels().getData(), 512);
+    artnet.sendDmx("192.168.47.102", 1, 0, testImage.getPixels().getData(), 512);
 
     //list nodes for sending
      //   troll.sendDmx(ip, testImage.getPixels(), 512);
 //    artnet.sendDmx("10.0.0.149", testImage.getPixels(), 512);
    //     artnet.sendDmx("10.0.1.97", testImage.getPixels().getData(), 512);
-    artnet.sendDmx("10.0.1.97", 0, 0, testImage.getPixels().getData(), 512);
-    artnet.sendDmx("10.0.1.97", 0, 1, testImage.getPixels().getData(), 512);
-    artnet.sendDmx("10.0.1.97", 0, 2, testImage.getPixels().getData(), 512);
+//    artnet.sendDmx("10.0.0.100", 0, 0, testImage.getPixels().getData(), 512);
+//    artnet.sendDmx("10.0.0.100", 0, 1, testImage.getPixels().getData(), 512);
+//    artnet.sendDmx("10.0.0.100", 0, 2, testImage.getPixels().getData(), 512);
 
+//    artnet.sendDmx("192.168.47.102", 0, 0, testImage.getPixels().getData(), 512);
+//     artnet.sendDmx("192.168.47.102", 0, 1, testImage.getPixels().getData(), 512);
+//     artnet.sendDmx("192.168.47.102", 1, 1, testImage.getPixels().getData(), 512);
+//     artnet.sendDmx("192.168.47.102", 1, 0, testImage.getPixels().getData(), 512);
 
 }
 
