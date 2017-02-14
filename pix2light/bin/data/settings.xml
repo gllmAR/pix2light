@@ -18,8 +18,8 @@
 	<trail>
 		<show>1</show>
 		<length>47554</length>
-		<fuzz>0.872449</fuzz>
-		<opacity>0.0612245</opacity>
+		<fuzz>0.55102</fuzz>
+		<opacity>0.0714286</opacity>
 	</trail>
 	<sampler>
 		<samplerX>6</samplerX>
@@ -27,9 +27,9 @@
 		<pixelX>15</pixelX>
 		<pixelY>15</pixelY>
 		<magnification>3.58418</magnification>
-		<showCaramel>1</showCaramel>
-		<caramel>0.739796</caramel>
-		<opacity>0.72449</opacity>
+		<showCaramel>0</showCaramel>
+		<caramel>0.668367</caramel>
+		<opacity>0.27551</opacity>
 	</sampler>
 	<artnet>
 		<sendArtnet>1</sendArtnet>
