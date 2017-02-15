@@ -28,7 +28,7 @@ void ImgLoader::setupGui(){
     imgLoaderGui.setName("imgLoader");
     imgLoaderGui.add(imgNext.setup("next"));
     imgLoaderGui.add(imgPrev.setup("prev"));
-    imgLoaderGui.add(backgroundOpacity.set("opacity ", .1, 0, 1));
+    imgLoaderGui.add(backgroundOpacity.set("opacity", 0.1, 0.0, 1.0));
     imgLoaderGui.add(reloadFolder.set("reloadFolder",0, 0, 1));
     
     imgNext.addListener(this, &ImgLoader::next);
@@ -179,10 +179,10 @@ void ImgLoader::update(){
 
 
 void ImgLoader::draw(int originX, int originY, int width, int height){
-    
+    ofPushStyle();
     ofSetColor(255*backgroundOpacity);
     canvasFbo.draw(originX,originY,width,height);
-    
+    ofPopStyle();
 }
 
 
