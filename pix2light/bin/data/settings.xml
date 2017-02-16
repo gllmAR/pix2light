@@ -4,22 +4,23 @@
 		<screenShot>0</screenShot>
 	</settings>
 	<imgLoader>
-		<opacity_>0.173469</opacity_>
+		<opacity_>0.806122</opacity_>
 	<reloadFolder>0</reloadFolder>
+	<opacity>0.63</opacity>
 	</imgLoader>
 	<orbit>
 		<active>1</active>
 		<speedX>1.53061</speedX>
 		<speedY>1.78571</speedY>
-		<lfoX>0.000627325</lfoX>
-		<lfoY>0.000551627</lfoY>
+		<lfoX>0.000660276</lfoX>
+		<lfoY>0.000649109</lfoY>
 	<shuffleRange>0.01</shuffleRange>
 	</orbit>
 	<trail>
 		<show>1</show>
 		<length>47554</length>
-		<fuzz>0.55102</fuzz>
-		<opacity>0.0714286</opacity>
+		<fuzz>0.1</fuzz>
+		<opacity>0.571429</opacity>
 	</trail>
 	<sampler>
 		<samplerX>6</samplerX>
@@ -27,14 +28,14 @@
 		<pixelX>15</pixelX>
 		<pixelY>15</pixelY>
 		<magnification>3.58418</magnification>
-		<showCaramel>0</showCaramel>
+		<showCaramel>1</showCaramel>
 		<caramel>0.668367</caramel>
-		<opacity>0.27551</opacity>
+		<opacity>0.908163</opacity>
 	</sampler>
 	<artnet>
 		<sendArtnet>1</sendArtnet>
 		<showBrightness_>1</showBrightness_>
-		<opacity>0.122449</opacity>
+		<opacity>0.336</opacity>
 	<outputTrim>1</outputTrim>
 	</artnet>
 <pix2light/>
@@ -43,6 +44,6 @@
 		<fontLetterSpacing>1.0051</fontLetterSpacing>
 		<posX>0.0204082</posX>
 		<posY>0.959184</posY>
-		<fontColor>140, 140, 140, 255</fontColor>
+		<fontColor>255, 255, 255, 255</fontColor>
 	</annotation>
 </pix2light>

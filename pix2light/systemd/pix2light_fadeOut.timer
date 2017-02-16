@@ -2,7 +2,7 @@
 Description=pix2light nextimage timer
 
 [Timer]
-OnCalendar= *-*-* 21:05:00
+OnCalendar= *-*-* 22:35:00
 Persistent=true
 
 [Install]
