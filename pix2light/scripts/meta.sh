@@ -21,34 +21,32 @@ numServices=${#numServices[@]}
 declare -a SERVICES_ARRAY=()
 SERVICES_FUNCTION=("start" "stop" "restart" "status")
 
-EXITFLAG=0
-
-while [ $EXITFLAG -eq 0 ]
+EXITSERVICES=0
+while [ $EXITSERVICES -le 0 ]
 do
-	index=1
+	INDEXSERVICE=1
 	clear 
 	echo "========="
 
 	for file in $SYSTEMDPATH/*.service
 	do
-   		echo $index `basename $file`
+   		echo $INDEXSERVICE `basename $file`
    
    		#echo $index
-   		SERVICES_ARRAY[$index]=`basename $file`
-   		index=$((index+1))
+   		SERVICES_ARRAY[$INDEXSERVICE]=`basename $file`
+   		INDEXSERVICE=$((INDEXSERVICE+1))
    		#echo ${SERVICES_ARRAY[$index]}
 	done
 	
 	echo "?========"
 	
-	read x
+	read INPUTSERVICE
 	
-	if [ $x -eq 0 ]
+	if [ $INPUTSERVICE -eq 0 ]
 		then
-		echo "exit with 0"
-		EXITFLAG=1
+		EXITSERVICES=1
 		
-	elif [ $x -le $numServices ]
+	elif [ $INPUTSERVICE -le $numServices ]
 		then
 		## SELECT A FUNCTION 
 		clear
@@ -61,19 +59,19 @@ do
 			indexFunction=$(($indexFunction+1))
 		done
 		echo "?========"
-		read y
+		read INPUTFUNCTION
 		
-		if [ $y -eq 0 ]
+		if [ $INPUTFUNCTION -eq 0 ]
 		then
-			echo "exit"
+			echo "<-"
 			sleep 1
-		elif [ $y -le $indexFunction ]
+		elif [ $INPUTFUNCTION -le $indexFunction ]
 		then 
-			echo sudo systemctl ${SERVICES_FUNCTION[$y-1]} ${SERVICES_ARRAY[$x]}
-			sudo systemctl ${SERVICES_FUNCTION[$y-1]} ${SERVICES_ARRAY[$x]}
+			echo sudo systemctl ${SERVICES_FUNCTION[$INPUTFUNCTION-1]} ${SERVICES_ARRAY[$INPUTSERVICE]}
+			sudo systemctl ${SERVICES_FUNCTION[$INPUTFUNCTION-1]} ${SERVICES_ARRAY[$INPUTSERVICE]}
 			sleep 1
 		else 	
-			echo "other"
+			echo "!?"
 			sleep 1
 	fi		
 		
