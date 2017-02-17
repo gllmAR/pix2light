@@ -16,7 +16,7 @@ cd $SCRIPTPATH
 #echo $numServices
 
 
-SCRIPT_FUNCTION=( "pull" "status" "add -A" "commit -a -m 'auto push'" "push" )
+SCRIPT_FUNCTION=( "status" "pull" "add -A" "commit -a -m auto" "push" )
 
 
 EXITSCRIPT=0
