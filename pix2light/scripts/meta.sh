@@ -8,73 +8,53 @@ popd > /dev/null
 
 # set systemdpath
 cd $SCRIPTPATH
-cd ../systemd
-SYSTEMDPATH=`pwd`
+
 
 #echo "systemD " $SYSTEMDPATH
 
 # how many .service file in the folder
-numServices=($SYSTEMDPATH/*.service)
-numServices=${#numServices[@]}
+numScripts=($SCRIPTPATH/*.*)
+numScripts=${#numScripts[@]}
 #echo $numServices
 
-declare -a SERVICES_ARRAY=()
-SERVICES_FUNCTION=("start" "stop" "restart" "status")
+#declare -a SERVICES_ARRAY=()
+#SERVICES_FUNCTION=("start" "stop" "restart" "status")
 
-EXITSERVICES=0
-while [ $EXITSERVICES -le 0 ]
+EXITSCRIPTS=0
+while [ $EXITSCRIPTS -le 0 ]
+cd $SCRIPTPATH
 do
-	INDEXSERVICE=1
+	INDEXSCRIPTS=1
 	clear 
-	echo "========="
+	echo `basename $0`
+	echo $USER"@"$HOSTNAME
+	echo "=========" 
 
-	for file in $SYSTEMDPATH/*.service
+	for file in $SCRIPTPATH/*.*
 	do
-   		echo $INDEXSERVICE `basename $file`
+   		echo $INDEXSCRIPTS `basename $file`
    
    		#echo $index
-   		SERVICES_ARRAY[$INDEXSERVICE]=`basename $file`
-   		INDEXSERVICE=$((INDEXSERVICE+1))
+   		SCRIPTS_ARRAY[$INDEXSCRIPTS]=`basename $file`
+   		INDEXSCRIPTS=$((INDEXSCRIPTS+1))
    		#echo ${SERVICES_ARRAY[$index]}
 	done
 	
 	echo "?========"
 	
-	read INPUTSERVICE
+	read INPUTSCRIPTS
 	
-	if [ $INPUTSERVICE -eq 0 ]
+	if [ $INPUTSCRIPTS -eq 0 ]
 		then
-		EXITSERVICES=1
+		EXITSCRIPTS=1
+		sleep .2
 		
-	elif [ $INPUTSERVICE -le $numServices ]
+	elif [ $INPUTSCRIPTS -le $numScripts ]
 		then
-		## SELECT A FUNCTION 
-		clear
-		indexFunction=0
-		echo "========="
-		for i in "${SERVICES_FUNCTION[@]}"
-		do
-			tempindexFunction=$(($indexFunction + 1))
-			echo $tempindexFunction ${SERVICES_FUNCTION[$indexFunction]}
-			indexFunction=$(($indexFunction+1))
-		done
-		echo "?========"
-		read INPUTFUNCTION
-		
-		if [ $INPUTFUNCTION -eq 0 ]
-		then
-			echo "<-"
-			sleep 1
-		elif [ $INPUTFUNCTION -le $indexFunction ]
-		then 
-			echo sudo systemctl ${SERVICES_FUNCTION[$INPUTFUNCTION-1]} ${SERVICES_ARRAY[$INPUTSERVICE]}
-			sudo systemctl ${SERVICES_FUNCTION[$INPUTFUNCTION-1]} ${SERVICES_ARRAY[$INPUTSERVICE]}
-			sleep 1
-		else 	
-			echo "!?"
-			sleep 1
-	fi		
-		
+		clear	
+		echo  ${SCRIPTS_ARRAY[$INPUTSCRIPTS]}
+			./${SCRIPTS_ARRAY[$INPUTSCRIPTS]}
+	sleep 1		
 	
 		#sudo systemctl start 'basename ${SERVICES_ARRAY[$x]'}	
 	else
