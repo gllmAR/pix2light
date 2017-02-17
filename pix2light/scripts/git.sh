@@ -46,6 +46,7 @@ do
 		then
 		clear	
 		echo  "git" ${SCRIPT_FUNCTION[$((USERINPUT-1))]}
+		echo pwd
 		git ${SCRIPT_FUNCTION[$((USERINPUT-1))]}
 		sleep 1	
 	
