@@ -46,8 +46,8 @@ do
 		then
 		clear	
 		echo  "git" ${SCRIPT_FUNCTION[$((USERINPUT-1))]}
-		git ${SCRIPT_FUNCTION[$USERINPUT]}
-		sleep 1		
+		git ${SCRIPT_FUNCTION[$((USERINPUT-1))]}
+		sleep 1	
 	
 		#sudo systemctl start 'basename ${SERVICES_ARRAY[$x]'}	
 	else
