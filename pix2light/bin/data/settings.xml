@@ -12,13 +12,13 @@
 		<active>1</active>
 		<speedX>1.53061</speedX>
 		<speedY>1.78571</speedY>
-		<lfoX>0.000660276</lfoX>
-		<lfoY>0.000649109</lfoY>
+		<lfoX>0.000423261</lfoX>
+		<lfoY>9.138e-05</lfoY>
 	<shuffleRange>0.01</shuffleRange>
 	</orbit>
 	<trail>
 		<show>1</show>
-		<length>47554</length>
+		<length>10000</length>
 		<fuzz>0.1</fuzz>
 		<opacity>0.571429</opacity>
 	</trail>
