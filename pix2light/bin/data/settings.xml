@@ -12,13 +12,22 @@
 		<active>1</active>
 		<speedX>1.02041</speedX>
 		<speedY>1.78571</speedY>
+<<<<<<< HEAD
 		<lfoX>0.000583087</lfoX>
 		<lfoY>0.000591205</lfoY>
+=======
+		<lfoX>0.000423261</lfoX>
+		<lfoY>9.138e-05</lfoY>
+>>>>>>> 97f4d5fc9733fcf69ac098d9ea08624163a4de42
 	<shuffleRange>0.01</shuffleRange>
 	</orbit>
 	<trail>
 		<show>1</show>
+<<<<<<< HEAD
 		<length>20567</length>
+=======
+		<length>10000</length>
+>>>>>>> 97f4d5fc9733fcf69ac098d9ea08624163a4de42
 		<fuzz>0.1</fuzz>
 		<opacity>0.571429</opacity>
 	</trail>
