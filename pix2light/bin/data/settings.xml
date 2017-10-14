@@ -10,24 +10,33 @@
 	</imgLoader>
 	<orbit>
 		<active>1</active>
-		<speedX>1.53061</speedX>
+		<speedX>1.02041</speedX>
 		<speedY>1.78571</speedY>
+<<<<<<< HEAD
+		<lfoX>0.000583087</lfoX>
+		<lfoY>0.000591205</lfoY>
+=======
 		<lfoX>0.000423261</lfoX>
 		<lfoY>9.138e-05</lfoY>
+>>>>>>> 97f4d5fc9733fcf69ac098d9ea08624163a4de42
 	<shuffleRange>0.01</shuffleRange>
 	</orbit>
 	<trail>
 		<show>1</show>
+<<<<<<< HEAD
+		<length>20567</length>
+=======
 		<length>10000</length>
+>>>>>>> 97f4d5fc9733fcf69ac098d9ea08624163a4de42
 		<fuzz>0.1</fuzz>
 		<opacity>0.571429</opacity>
 	</trail>
 	<sampler>
 		<samplerX>1</samplerX>
 		<samplerY>1</samplerY>
-		<pixelX>15</pixelX>
-		<pixelY>15</pixelY>
-		<magnification>3.58418</magnification>
+		<pixelX>26</pixelX>
+		<pixelY>5</pixelY>
+		<magnification>16.6173</magnification>
 		<showCaramel>1</showCaramel>
 		<caramel>0.668367</caramel>
 		<opacity>0.908163</opacity>
@@ -36,12 +45,12 @@
 		<sendArtnet>1</sendArtnet>
 		<showBrightness_>1</showBrightness_>
 		<opacity>0.336</opacity>
-	<outputTrim>1</outputTrim>
+	<outputTrim>0.734694</outputTrim>
 	</artnet>
 <pix2light/>
 <annotation>
-		<fontSize>14</fontSize>
-		<fontLetterSpacing>1.0051</fontLetterSpacing>
+		<fontSize>18</fontSize>
+		<fontLetterSpacing>0.928571</fontLetterSpacing>
 		<posX>0.0204082</posX>
 		<posY>0.959184</posY>
 		<fontColor>255, 255, 255, 255</fontColor>
