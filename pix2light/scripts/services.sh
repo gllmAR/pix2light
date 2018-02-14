@@ -52,7 +52,6 @@ do
 		clear
 		indexFunction=0
 		echo "=========" 
-		echo $HOSTNAME
 		for i in "${SERVICES_FUNCTION[@]}"
 		do
 			tempindexFunction=$(($indexFunction + 1))

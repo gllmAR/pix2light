@@ -40,7 +40,7 @@ do
    		#echo ${SERVICES_ARRAY[$index]}
 	done
 	
-	echo "?========"
+	echo "?=====<<0"
 	
 	read INPUTSCRIPTS
 	

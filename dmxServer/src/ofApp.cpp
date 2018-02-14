@@ -8,7 +8,10 @@ void ofApp::setup(){
     ofSetFrameRate(44);
 
     gui.add(port.set("port", 12345 ,12340, 12350));
-    gui.add(deviceName.set("device", "d"));
+
+//    gui.add(deviceName.set("device", "d"));
+     gui.add(deviceName.set("device", "1"));
+    
     gui.loadFromFile("settings.xml");
             
     connectUsbDmx(deviceName);
